@@ -102,3 +102,30 @@ def _ingredients_page():
     from app import ingredients_page
 
     ingredients_page()
+
+
+def test_recipes_list_and_edit(tmp_path, monkeypatch):
+    shutil.copytree(cli.DATA_DIR, tmp_path / "data", ignore=shutil.ignore_patterns("*.db"))
+    monkeypatch.setattr(cli, "DATA_DIR", tmp_path / "data")
+    before = load_data(cli.DATA_DIR).recipes
+    at = AppTest.from_function(_recipes_page).run()
+    assert not at.exception
+    assert len(at.dataframe[0].value) == len(before)
+
+    at.button[0].click().run()  # Save an empty new recipe
+    assert "name must be non-empty text" in at.error[0].value
+
+    at.selectbox[0].set_value("buckwheat_porridge").run()
+    at.text_input[1].input("Grikių košė")
+    at.button[0].click().run()
+    assert not at.exception and not at.error
+    after = load_data(cli.DATA_DIR).recipes
+    assert after["buckwheat_porridge"].name == "Grikių košė"
+    assert after["buckwheat_porridge"].ingredients == before["buckwheat_porridge"].ingredients
+    assert len(after) == len(before)
+
+
+def _recipes_page():
+    from app import recipes_page
+
+    recipes_page()

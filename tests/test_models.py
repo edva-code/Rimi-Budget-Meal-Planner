@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 import yaml
 
-from planner.models import DataError, load_data
+from planner.models import DataError, load_data, save_recipes
 
 DATA = Path(__file__).parent.parent / "data"
 
@@ -94,3 +94,27 @@ def test_invalid_yaml_and_missing_files(data_dir):
     assert "recipes.yaml: invalid YAML" in errors_of(data_dir)
     (data_dir / "recipes.yaml").unlink()
     assert "recipes.yaml: file not found" in errors_of(data_dir)
+
+
+def test_save_recipes_round_trips_and_keeps_header(data_dir):
+    recipes = load_data(data_dir).recipes
+    recipes["buckwheat_porridge"].name = "Grikių košė"
+    save_recipes(data_dir, recipes)
+    assert load_data(data_dir).recipes == recipes
+    assert (data_dir / "recipes.yaml").read_text(encoding="utf-8").startswith("# Quantities")
+
+
+def test_save_recipes_never_drops_data(data_dir):
+    path = data_dir / "recipes.yaml"
+    original = path.read_text(encoding="utf-8")
+    recipes = load_data(data_dir).recipes
+    with pytest.raises(DataError, match="refusing to drop buckwheat_porridge"):
+        save_recipes(data_dir, {k: r for k, r in recipes.items() if k != "buckwheat_porridge"})
+    path.write_text(original + "# my note\n", encoding="utf-8")
+    with pytest.raises(DataError, match="comments below the header"):
+        save_recipes(data_dir, recipes)
+    path.write_text(original, encoding="utf-8")
+    save_recipes(data_dir, recipes)
+    assert (data_dir / "recipes.yaml.bak").read_text(encoding="utf-8") == original
+    assert load_data(data_dir).recipes == recipes
+    assert not (data_dir / "recipes.yaml.tmp").exists()

@@ -3,3 +3,5 @@ __pycache__/
 .pytest_cache/
 data/prices.db
 logs/
+data/*.bak
+data/*.tmp

@@ -7,7 +7,9 @@ from datetime import UTC, datetime
 import streamlit as st
 
 import cli
-from planner.models import UNITS, DataError, Ingredient, PlannerData, append_ingredient, load_data
+from planner.models import (
+    MEAL_TYPES, UNITS, DataError, Ingredient, PlannerData, Recipe, append_ingredient, load_data, save_recipes,
+)
 from planner.optimizer import PlanError, make_plan, recipe_kcal, recipe_protein
 from planner.prices import connect, current_product, history, is_unusually_low, save, update_all
 from planner.scraper import RimiScraper
@@ -198,12 +200,73 @@ def add_ingredient(data: PlannerData, conn) -> None:
     st.success(f"Added {ingredient.key}; use it in a recipe on the Recipes page.")
 
 
+def recipes_page() -> None:
+    st.title("Recipes")
+    data = load_data(cli.DATA_DIR)
+    st.dataframe([{
+        "recipe": r.name, "meals": ", ".join(r.meal_type), "servings": r.servings,
+        "kcal / serving": round(recipe_kcal(data, r) / r.servings),
+        "protein g / serving": round(recipe_protein(data, r) / r.servings),
+        "minutes": r.prep_minutes, "tags": ", ".join(r.tags),
+    } for r in data.recipes.values()], hide_index=True)
+    edit_recipe(data)
+
+
+def edit_recipe(data: PlannerData) -> None:
+    """Form for a new or existing recipe; saving rewrites recipes.yaml."""
+    st.subheader("Add or edit")
+    choice = st.selectbox("Recipe", [None, *data.recipes], format_func=lambda k: data.recipes[k].name if k else "New recipe")
+    old = data.recipes.get(choice) or Recipe("", "", [], 2, {})
+    with st.form(f"recipe_{choice}"):
+        c1, c2 = st.columns(2)
+        key = c1.text_input("Key (e.g. bean_soup)", old.key, disabled=choice is not None)
+        name = c2.text_input("Name", old.name)
+        meal_type = c1.multiselect("Meals", MEAL_TYPES, old.meal_type)
+        tags = c2.multiselect("Tags", sorted({t for r in data.recipes.values() for t in r.tags}), old.tags, accept_new_options=True)
+        servings = c1.number_input("Servings", 1, value=old.servings)
+        prep = c2.number_input("Prep minutes (0 = unknown)", 0, value=old.prep_minutes or 0)
+        rows = st.data_editor(
+            [{"ingredient": i, "quantity": q} for i, q in old.ingredients.items()], num_rows="dynamic", column_config={
+                "ingredient": st.column_config.SelectboxColumn(options=sorted(data.ingredients), required=True),
+                "quantity": st.column_config.NumberColumn(help="For all servings, in the ingredient's unit", min_value=0, required=True),
+            },
+        )
+        steps = st.text_area("Steps, one per line", "\n".join(old.steps))
+        if not st.form_submit_button("Save recipe", type="primary"):
+            return
+    recipe = Recipe(
+        key.strip(), name.strip(), meal_type, servings,
+        {r["ingredient"]: _whole(r["quantity"]) for r in rows if r["ingredient"] and r["quantity"] is not None},
+        prep or None, tags, [line.strip() for line in steps.splitlines() if line.strip()],
+    )
+    problems = recipe.problems()
+    if not recipe.key.isidentifier():
+        problems.append("key must be letters, digits and _ only")
+    elif choice is None and recipe.key in data.recipes:
+        problems.append(f"{recipe.key!r} already exists")
+    if problems:
+        st.error("\n".join(f"- {p}" for p in problems))
+        return
+    try:
+        save_recipes(cli.DATA_DIR, {**data.recipes, recipe.key: recipe})
+    except DataError as e:
+        st.error(str(e))
+    else:
+        st.success(f"Saved {recipe.name}; the old file is in recipes.yaml.bak.")
+
+
+def _whole(q: float) -> float | int:
+    """150.0 -> 150, so recipes.yaml stays tidy."""
+    return int(q) if float(q).is_integer() else q
+
+
 def main() -> None:
     st.set_page_config(page_title="Rimi meal planner", page_icon="🛒", layout="wide")
     cli.setup_logging()
     page = st.navigation([
         st.Page(plan_page, title="Plan", icon="📅"), st.Page(shopping_page, title="Shopping list", icon="🛒"),
         st.Page(prices_page, title="Prices", icon="🏷️"), st.Page(ingredients_page, title="Ingredients", icon="🥕"),
+        st.Page(recipes_page, title="Recipes", icon="📖"),
     ])
     try:
         page.run()

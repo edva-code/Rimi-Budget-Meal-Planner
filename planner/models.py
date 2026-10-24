@@ -6,8 +6,10 @@ files, and raises one DataError that lists all problems at once.
 
 from __future__ import annotations
 
+import re
 from dataclasses import MISSING, asdict, dataclass, field, fields
 from difflib import get_close_matches
+from itertools import takewhile
 from pathlib import Path
 from typing import Any
 
@@ -221,12 +223,58 @@ def _build(cls: type, where: str, raw: Any, errors: list[str], **given: Any) -> 
     return None if bad else obj
 
 
+class _Flow(list):
+    """A list written inline: [a, b]."""
+
+
+class _Dumper(yaml.SafeDumper):
+    """Indents block lists under their key, like the hand-written files."""
+
+    def increase_indent(self, flow: bool = False, indentless: bool = False) -> None:
+        return super().increase_indent(flow, False)
+
+
+_Dumper.add_representer(_Flow, lambda d, v: d.represent_sequence("tag:yaml.org,2002:seq", v, flow_style=True))
+
+
+def _dump(key: str, raw: dict[str, Any]) -> str:
+    """One `key: {fields}` YAML block, leaving out the key field and empty optionals."""
+    raw = {k: v for k, v in raw.items() if k != "key" and v not in (None, [])}
+    return yaml.dump({key: raw}, Dumper=_Dumper, allow_unicode=True, sort_keys=False, width=200)
+
+
 def append_ingredient(data_dir: Path | str, ingredient: Ingredient) -> None:
     """Add an ingredient at the end of ingredients.yaml; appending keeps the file's comments."""
-    raw = {k: v for k, v in asdict(ingredient).items() if k != "key" and v not in (None, [])}
-    text = yaml.safe_dump({ingredient.key: raw}, allow_unicode=True, sort_keys=False)
     with (Path(data_dir) / "ingredients.yaml").open("a", encoding="utf-8") as f:
-        f.write("\n" + text)
+        f.write("\n" + _dump(ingredient.key, asdict(ingredient)))
+
+
+def save_recipes(data_dir: Path | str, recipes: dict[str, Recipe]) -> None:
+    """Rewrite recipes.yaml from recipes, keeping the file's leading comment lines and layout.
+
+    Refuses (DataError) rather than lose anything: recipes missing from `recipes`,
+    comments below the header, or text that doesn't read back as `recipes`. The
+    previous file is kept as recipes.yaml.bak and the new one swapped in atomically.
+    """
+    path = Path(data_dir) / "recipes.yaml"
+    old = path.read_text(encoding="utf-8")
+    lines = old.splitlines(keepends=True)
+    header = "".join(takewhile(lambda line: line.startswith("#"), lines))
+    if missing := set(yaml.safe_load(old) or {}) - set(recipes):
+        raise DataError(f"recipes.yaml: refusing to drop {', '.join(sorted(missing))}")
+    if any(re.search(r"(^|\s)#", line) for line in lines[header.count("\n"):]):
+        raise DataError("recipes.yaml: has comments below the header that saving would lose; move them to the top")
+    blocks = [_dump(r.key, {
+        "name": r.name, "meal_type": _Flow(r.meal_type), "servings": r.servings, "prep_minutes": r.prep_minutes,
+        "tags": _Flow(r.tags), "ingredients": r.ingredients, "steps": r.steps,
+    }) for r in recipes.values()]
+    text = header + "\n" + "\n".join(blocks)
+    if {k: Recipe(key=k, **v) for k, v in yaml.safe_load(text).items()} != recipes:
+        raise DataError("recipes.yaml: written text doesn't read back the same; not saved")
+    path.with_suffix(".yaml.bak").write_text(old, encoding="utf-8")
+    tmp = path.with_suffix(".yaml.tmp")
+    tmp.write_text(text, encoding="utf-8")
+    tmp.replace(path)  # atomic: a crash leaves the old file or the new one, never half of it
 
 
 def load_data(data_dir: Path | str) -> PlannerData:
