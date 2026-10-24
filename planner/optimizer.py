@@ -9,6 +9,7 @@ then spread over the days (_schedule).
 
 from __future__ import annotations
 
+from collections import Counter
 from dataclasses import dataclass
 from typing import NamedTuple
 
@@ -72,7 +73,8 @@ def _shelf_days(data: PlannerData, recipe: Recipe) -> int:
 
 
 def _solve(
-    data: PlannerData, recipes: list[Recipe], offers: dict[str, Offer], budget_cents: int | None, nutrition: bool = True
+    data: PlannerData, recipes: list[Recipe], offers: dict[str, Offer], budget_cents: int | None, nutrition: bool = True,
+    locks: dict[tuple[int, str], str] | None = None,
 ) -> tuple[dict[tuple[str, str], int], dict[str, int]] | None:
     """Solve the integer program; returns (cooks, packs) or None if infeasible."""
     s = data.settings
@@ -96,6 +98,8 @@ def _solve(
         prob += used[i] <= packs[i] * offers[i].pack + data.pantry.get(i, 0)
     for r in recipes:
         prob += pulp.lpSum(v for (rk, _), v in cooks.items() if rk == r.key) <= s.max_repeats
+    for k, days in Counter((r, slot) for (_, slot), r in (locks or {}).items()).items():
+        prob += servings[k] >= s.people * days  # enough cooked for every locked meal
     if budget_cents is not None:
         prob += spend <= budget_cents
     if nutrition:
@@ -138,8 +142,10 @@ def _arrange(left: dict[str, int], need: int, n: int, prev: str | None, allowed,
     return None
 
 
-def _schedule(data: PlannerData, cooks: dict[tuple[str, str], int]) -> list[dict[str, str]]:
-    """Spread cooked meals over the days: perishable dishes early, no dish two days running or twice a day."""
+def _schedule(
+    data: PlannerData, cooks: dict[tuple[str, str], int], locks: dict[tuple[int, str], str] | None = None
+) -> list[dict[str, str]]:
+    """Spread cooked meals over the days: locked meals stay put, perishable dishes early, no dish two days running."""
     s = data.settings
     pools = {slot: {r: n * data.recipes[r].servings for (r, sl), n in cooks.items() if sl == slot} for slot in s.meal_slots}
     weeks: dict[str, list[str]] = {}
@@ -157,15 +163,22 @@ def _schedule(data: PlannerData, cooks: dict[tuple[str, str], int]) -> list[dict
             lambda r, n, prev: left[r] >= s.people and r != prev,
             lambda r, n, prev: left[r] > 0,  # ponytail: servings that don't split into whole meals; repeats allowed
         )
+        locked = {d: r for (d, sl), r in (locks or {}).items() if sl == slot}
+        rules = tuple(  # bind rule now, not when the lambda runs
+            lambda r, n, prev, rule=rule: locked.get(s.days - n, r) == r and rule(r, n, prev) for rule in rules
+        )
         weeks[slot] = next(w for rule in rules if (w := _arrange(left, s.people, s.days, None, rule, rank)) is not None)
     return [{slot: weeks[slot][d] for slot in s.meal_slots} for d in range(s.days)]
 
 
-def make_plan(data: PlannerData, products: dict[str, Product]) -> Plan:
+def make_plan(
+    data: PlannerData, products: dict[str, Product], locks: dict[tuple[int, str], str] | None = None
+) -> Plan:
     """Cheapest weekly plan within budget and nutrition targets; raises PlanError if none exists.
 
     products maps ingredient keys to their current Rimi product; recipes using an
-    ingredient without a known price are left out.
+    ingredient without a known price are left out. locks maps (day index, slot) to
+    a recipe key that must be served there.
     """
     s = data.settings
     offers = {k: o for k, p in products.items() if (o := offer(data.ingredients[k], p, s.use_loyalty_prices))}
@@ -180,13 +193,17 @@ def make_plan(data: PlannerData, products: dict[str, Product]) -> Plan:
     for slot in s.meal_slots:
         if not any(slot in r.meal_type for r in recipes):
             raise PlanError(f"No usable recipe for {slot}: {skipped}")
+    usable = {(r.key, slot) for r in recipes for slot in r.meal_type}
+    for (day, slot), r in (locks or {}).items():
+        if (r, slot) not in usable or not 0 <= day < s.days or slot not in s.meal_slots:
+            raise PlanError(f"Can't lock {r} for {slot} on day {day + 1}: {skipped.get(r, 'not a recipe for that meal')}.")
 
-    result = _solve(data, recipes, offers, s.weekly_budget_cents)
+    result = _solve(data, recipes, offers, s.weekly_budget_cents, locks=locks)
     if result is None:
-        if cheapest := _solve(data, recipes, offers, None):
+        if cheapest := _solve(data, recipes, offers, None, locks=locks):
             cost = sum(offers[i].price_cents * n for i, n in cheapest[1].items())
             raise PlanError(f"Budget €{s.weekly_budget_cents / 100:.2f} is too low: the cheapest plan costs €{cost / 100:.2f}.")
-        if _solve(data, recipes, offers, None, nutrition=False):
+        if _solve(data, recipes, offers, None, nutrition=False, locks=locks):
             raise PlanError(
                 f"The recipes can't reach {s.kcal_per_person_day:g} kcal and {s.protein_per_person_day:g} g protein "
                 f"per person per day (±{s.nutrition_tolerance:.0%}): add recipes or loosen nutrition_tolerance."
@@ -196,7 +213,7 @@ def make_plan(data: PlannerData, products: dict[str, Product]) -> Plan:
     cooks, packs = result
     eaters = s.people * s.days
     return Plan(
-        days=_schedule(data, cooks),
+        days=_schedule(data, cooks, locks),
         cooks=cooks,
         packs=packs,
         offers={i: offers[i] for i in packs},

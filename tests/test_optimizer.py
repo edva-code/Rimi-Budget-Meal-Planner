@@ -88,3 +88,11 @@ def test_schedule_avoids_repeats_and_same_day_clash(data):
         week = [d[slot] for d in days]
         assert all(a != b for a, b in zip(week, week[1:])), week
     assert all(d["lunch"] != d["dinner"] for d in days), days
+
+
+def test_locked_meals_stay_put(data, products):
+    locks = {(0, "dinner"): "lentil_soup", (3, "dinner"): "lentil_soup", (6, "breakfast"): "yogurt_bowl"}
+    plan = make_plan(data, products, locks)
+    assert all(plan.days[d][slot] == r for (d, slot), r in locks.items())
+    with pytest.raises(PlanError, match="Can't lock oatmeal for dinner"):
+        make_plan(data, products, {(0, "dinner"): "oatmeal"})
