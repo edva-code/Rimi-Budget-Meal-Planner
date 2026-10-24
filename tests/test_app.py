@@ -9,9 +9,15 @@ from streamlit.testing.v1 import AppTest
 import cli
 from planner.models import load_data
 from planner.prices import connect, save
-from planner.scraper import Product
+from planner.scraper import Product, RimiScraper
 
 APP = str(Path(__file__).parent.parent / "app.py")
+
+
+def _product(rimi_id: str) -> Product:
+    i = next(i for i in load_data(cli.DATA_DIR).ingredients.values() if rimi_id in (i.rimi_id, *i.alternatives))
+    return Product(rimi_id, f"Rimi {i.key}", 100, None, None, None, None, None, None,
+                   10 if i.unit == "pcs" else 500, i.unit, f"https://rimi.lt/p/{rimi_id}", True)
 
 
 @pytest.fixture(autouse=True)
@@ -19,10 +25,8 @@ def fake_db(tmp_path, monkeypatch):
     """Every ingredient at 1 € per pack of 500 g/ml or 10 pcs."""
     db = tmp_path / "prices.db"
     conn = connect(db)
-    for k, i in load_data(cli.DATA_DIR).ingredients.items():
-        product = Product(i.rimi_id, f"Rimi {k}", 100, None, None, None, None, None, None,
-                          10 if i.unit == "pcs" else 500, i.unit, f"https://rimi.lt/p/{k}", True)
-        save(conn, i.rimi_id, product, datetime(2026, 10, 24, 12, tzinfo=UTC))
+    for i in load_data(cli.DATA_DIR).ingredients.values():
+        save(conn, i.rimi_id, _product(i.rimi_id), datetime(2026, 10, 24, 12, tzinfo=UTC))
     monkeypatch.setattr(cli, "DB_FILE", db)
 
 
@@ -50,3 +54,20 @@ def _shopping_page():
     from app import shopping_page
 
     shopping_page()
+
+
+def test_update_prices_fetches_every_ingredient(tmp_path, monkeypatch):
+    monkeypatch.setattr(cli, "DB_FILE", tmp_path / "empty.db")
+    monkeypatch.setattr(RimiScraper, "get_price", lambda self, rimi_id: _product(rimi_id))
+    at = AppTest.from_function(_prices_page).run()
+    at.button[0].click().run()
+    assert not at.exception and not at.error
+    n = len(load_data(cli.DATA_DIR).ingredients)
+    assert at.success[0].value.startswith(f"Fetched {n}, cached 0")
+    assert at.caption[0].value.startswith(f"{n} of {n} ingredients priced")
+
+
+def _prices_page():
+    from app import prices_page
+
+    prices_page()

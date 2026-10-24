@@ -7,7 +7,8 @@ import streamlit as st
 import cli
 from planner.models import DataError, PlannerData, load_data
 from planner.optimizer import PlanError, make_plan, recipe_kcal, recipe_protein
-from planner.prices import connect, current_product
+from planner.prices import connect, current_product, update_all
+from planner.scraper import RimiScraper
 from planner.shopping_list import build, line_text, to_csv, to_markdown, total_text
 
 
@@ -108,10 +109,35 @@ def shopping_page() -> None:
     c2.download_button("Download CSV", to_csv(sl), "shopping_list.csv", "text/csv")
 
 
+def prices_page() -> None:
+    st.title("Prices")
+    data = load_data(cli.DATA_DIR)
+    conn = connect(cli.DB_FILE)
+    st.write("Fetches each ingredient from Rimi at most once a day, one request every 2 s.")
+    if st.button("Update prices", type="primary"):
+        bar = st.progress(0.0)
+        result = update_all(
+            conn, data.ingredients, RimiScraper(),
+            progress=lambda i, n, key: bar.progress(i / n, f"{key} ({i + 1}/{n})"),
+        )
+        bar.progress(1.0, "Done")
+        st.success(f"Fetched {result.fetched}, cached {result.cached} (refreshed at most once a day).")
+        if result.unavailable:
+            st.warning(f"Not on Rimi (nor alternatives): {', '.join(result.unavailable)}")
+        if result.failed:
+            st.error(f"Update failed, using last known price: {', '.join(result.failed)} (see {cli.LOG_FILE})")
+    records = [current_product(conn, i) for i in data.ingredients.values()]
+    if known := [r.fetched_at for r in records if r]:
+        st.caption(f"{len(known)} of {len(records)} ingredients priced; oldest price from {min(known).astimezone():%Y-%m-%d %H:%M}.")
+
+
 def main() -> None:
     st.set_page_config(page_title="Rimi meal planner", page_icon="🛒", layout="wide")
     cli.setup_logging()
-    page = st.navigation([st.Page(plan_page, title="Plan", icon="📅"), st.Page(shopping_page, title="Shopping list", icon="🛒")])
+    page = st.navigation([
+        st.Page(plan_page, title="Plan", icon="📅"), st.Page(shopping_page, title="Shopping list", icon="🛒"),
+        st.Page(prices_page, title="Prices", icon="🏷️"),
+    ])
     try:
         page.run()
     except DataError as e:
