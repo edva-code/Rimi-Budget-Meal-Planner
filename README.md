@@ -15,6 +15,6 @@ list.
 - [x] Data models and YAML loading with validation
 - [x] Price database, `update-prices` command and caching
 - [x] Optimizer (PuLP) with sample recipes and ingredients, `plan` command
-- [ ] Shopping list with Markdown and CSV export
+- [x] Shopping list with Markdown and CSV export (`plan --md list.md --csv list.csv`)
 - [ ] Streamlit UI
 - [ ] Extras: promo-aware planning, perishable scheduling, "use up my pantry" mode
