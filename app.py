@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
+from datetime import UTC, datetime
+
 import streamlit as st
 
 import cli
-from planner.models import DataError, PlannerData, load_data
+from planner.models import UNITS, DataError, Ingredient, PlannerData, append_ingredient, load_data
 from planner.optimizer import PlanError, make_plan, recipe_kcal, recipe_protein
-from planner.prices import connect, current_product, update_all
+from planner.prices import connect, current_product, history, is_unusually_low, save, update_all
 from planner.scraper import RimiScraper
 from planner.shopping_list import build, line_text, to_csv, to_markdown, total_text
 
@@ -131,12 +133,77 @@ def prices_page() -> None:
         st.caption(f"{len(known)} of {len(records)} ingredients priced; oldest price from {min(known).astimezone():%Y-%m-%d %H:%M}.")
 
 
+def ingredients_page() -> None:
+    st.title("Ingredients")
+    data = load_data(cli.DATA_DIR)
+    conn = connect(cli.DB_FILE)
+    rows = []
+    for key, i in data.ingredients.items():
+        r = current_product(conn, i)
+        p = r.product if r else None
+        low = p and is_unusually_low(conn, p.rimi_id)
+        rows.append({
+            "ingredient": key, "Rimi product": p.name if p else "no price known",
+            "price €": p.price_cents / 100 if p else None,
+            "Mano Rimi €": p.loyalty_price_cents / 100 if p and p.loyalty_price_cents else None,
+            "deal": "; ".join(filter(None, [cli.deals(p) if p else "", "unusually low" if low else ""])),
+            "8 weeks": [c / 100 for c in history(conn, p.rimi_id)] if p else [],
+            "link": p.url if p else None,
+        })
+    st.dataframe(rows, hide_index=True, column_config={
+        "8 weeks": st.column_config.LineChartColumn(), "link": st.column_config.LinkColumn(display_text="Rimi"),
+    })
+    add_ingredient(data, conn)
+
+
+def add_ingredient(data: PlannerData, conn) -> None:
+    """Search Rimi, pick a product and append it to ingredients.yaml with its price."""
+    st.subheader("Add from Rimi")
+    with st.form("search"):
+        query = st.text_input("Search Rimi")
+        if st.form_submit_button("Search Rimi") and query:
+            st.session_state.found = RimiScraper().search(query)
+    if not (found := st.session_state.get("found")):
+        if "found" in st.session_state:
+            st.info("Nothing found.")
+        return
+    product = st.selectbox("Product", found, format_func=lambda p: f"{p.name} — {cli.eur(p.price_cents)} €")
+    with st.form("new_ingredient"):
+        c1, c2, c3 = st.columns(3)
+        key = c1.text_input("Key (e.g. sourdough)")
+        unit = c2.selectbox("Unit", UNITS, index=UNITS.index(product.unit) if product.unit in UNITS else 0)
+        categories = sorted({i.category for i in data.ingredients.values()})
+        category = c3.selectbox("Category", categories, accept_new_options=True)
+        kcal = c1.number_input("kcal per 100 g/ml", 0.0, step=1.0)
+        protein = c2.number_input("Protein g per 100 g/ml", 0.0, step=0.1)
+        days = c3.number_input("Keeps for days (0 = long)", 0, step=1)
+        grams = c1.number_input("Grams per piece (pcs only)", 0.0, step=1.0)
+        if not st.form_submit_button("Add ingredient", type="primary"):
+            return
+    ingredient = Ingredient(
+        key.strip(), product.rimi_id, product.name, unit, category or "", kcal, protein,
+        perishable_days=days or None, grams_per_pcs=grams or None,
+    )
+    problems = ingredient.problems()
+    if not ingredient.key.isidentifier():
+        problems.append("key must be letters, digits and _ only")
+    elif ingredient.key in data.ingredients:
+        problems.append(f"{ingredient.key!r} already exists")
+    if problems:
+        st.error("\n".join(f"- {p}" for p in problems))
+        return
+    append_ingredient(cli.DATA_DIR, ingredient)
+    save(conn, product.rimi_id, product, datetime.now(UTC))
+    del st.session_state.found
+    st.success(f"Added {ingredient.key}; use it in a recipe on the Recipes page.")
+
+
 def main() -> None:
     st.set_page_config(page_title="Rimi meal planner", page_icon="🛒", layout="wide")
     cli.setup_logging()
     page = st.navigation([
         st.Page(plan_page, title="Plan", icon="📅"), st.Page(shopping_page, title="Shopping list", icon="🛒"),
-        st.Page(prices_page, title="Prices", icon="🏷️"),
+        st.Page(prices_page, title="Prices", icon="🏷️"), st.Page(ingredients_page, title="Ingredients", icon="🥕"),
     ])
     try:
         page.run()

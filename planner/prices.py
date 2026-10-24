@@ -180,10 +180,10 @@ def update_all(
     return result
 
 
-def is_unusually_low(conn: sqlite3.Connection, rimi_id: str, now: datetime | None = None) -> bool:
-    """True if the latest price is below LOW_PRICE_RATIO × the 8-week median."""
+def history(conn: sqlite3.Connection, rimi_id: str, now: datetime | None = None) -> list[int]:
+    """Known prices of a product over the last HISTORY_WINDOW, oldest first."""
     since = _ts((now or datetime.now(UTC)) - HISTORY_WINDOW)
-    history = [
+    return [
         r[0]
         for r in conn.execute(
             "SELECT price_cents FROM prices WHERE rimi_id = ? AND fetched_at >= ? "
@@ -191,4 +191,9 @@ def is_unusually_low(conn: sqlite3.Connection, rimi_id: str, now: datetime | Non
             (rimi_id, since),
         )
     ]
-    return len(history) >= MIN_HISTORY and history[-1] < LOW_PRICE_RATIO * median(history)
+
+
+def is_unusually_low(conn: sqlite3.Connection, rimi_id: str, now: datetime | None = None) -> bool:
+    """True if the latest price is below LOW_PRICE_RATIO × the 8-week median."""
+    prices = history(conn, rimi_id, now)
+    return len(prices) >= MIN_HISTORY and prices[-1] < LOW_PRICE_RATIO * median(prices)

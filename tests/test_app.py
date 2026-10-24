@@ -1,5 +1,6 @@
 """Smoke test of the Streamlit UI on made-up prices (no network)."""
 
+import shutil
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -71,3 +72,33 @@ def _prices_page():
     from app import prices_page
 
     prices_page()
+
+
+def test_ingredients_table_and_add_from_search(tmp_path, monkeypatch):
+    shutil.copytree(cli.DATA_DIR, tmp_path / "data", ignore=shutil.ignore_patterns("*.db"))
+    monkeypatch.setattr(cli, "DATA_DIR", tmp_path / "data")
+    found = Product("111", "Raugo duona, 500 g", 129, None, None, None, None, None, None, 500, "g", "https://rimi.lt/p/111", True)
+    monkeypatch.setattr(RimiScraper, "search", lambda self, query: [found])
+    at = AppTest.from_function(_ingredients_page).run()
+    assert not at.exception
+    assert len(at.dataframe[0].value) == len(load_data(cli.DATA_DIR).ingredients)
+
+    at.text_input[0].input("duona")
+    at.button[0].click().run()  # Search
+    at.text_input[1].input("buckwheat")
+    at.button[1].click().run()  # Add
+    assert "already exists" in at.error[0].value
+
+    at.text_input[1].input("sourdough")
+    at.number_input[0].set_value(250)
+    at.button[1].click().run()
+    assert not at.exception and not at.error
+    added = load_data(cli.DATA_DIR).ingredients["sourdough"]
+    assert (added.rimi_id, added.display_name, added.kcal_per_100) == ("111", found.name, 250)
+    assert (tmp_path / "data" / "ingredients.yaml").read_text(encoding="utf-8").startswith("# Ingredient")
+
+
+def _ingredients_page():
+    from app import ingredients_page
+
+    ingredients_page()

@@ -6,7 +6,7 @@ files, and raises one DataError that lists all problems at once.
 
 from __future__ import annotations
 
-from dataclasses import MISSING, dataclass, field, fields
+from dataclasses import MISSING, asdict, dataclass, field, fields
 from difflib import get_close_matches
 from pathlib import Path
 from typing import Any
@@ -219,6 +219,14 @@ def _build(cls: type, where: str, raw: Any, errors: list[str], **given: Any) -> 
         bad = obj.problems()
     errors += [f"{where}: {b}" for b in bad]
     return None if bad else obj
+
+
+def append_ingredient(data_dir: Path | str, ingredient: Ingredient) -> None:
+    """Add an ingredient at the end of ingredients.yaml; appending keeps the file's comments."""
+    raw = {k: v for k, v in asdict(ingredient).items() if k != "key" and v not in (None, [])}
+    text = yaml.safe_dump({ingredient.key: raw}, allow_unicode=True, sort_keys=False)
+    with (Path(data_dir) / "ingredients.yaml").open("a", encoding="utf-8") as f:
+        f.write("\n" + text)
 
 
 def load_data(data_dir: Path | str) -> PlannerData:

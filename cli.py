@@ -34,18 +34,23 @@ def eur(cents: int | None) -> str:
     return "" if cents is None else f"{cents / 100:.2f}"
 
 
+def deals(p: Product) -> str:
+    """Sale, Mano Rimi and multi-buy offers, "; "-separated, or ""."""
+    out = []
+    if p.regular_price_cents:
+        out.append(f"was {eur(p.regular_price_cents)}")
+    if p.loyalty_price_cents:
+        out.append(f"Mano Rimi {eur(p.loyalty_price_cents)}")
+    if p.promo_text:
+        out.append(f"{p.promo_text}: {eur(p.promo_price_cents)}")
+    return "; ".join(out)
+
+
 def format_product(p: Product) -> str:
     """One aligned line: id, price, deals, unit price, pack size, name."""
-    deals = []
-    if p.regular_price_cents:
-        deals.append(f"was {eur(p.regular_price_cents)}")
-    if p.loyalty_price_cents:
-        deals.append(f"Mano Rimi {eur(p.loyalty_price_cents)}")
-    if p.promo_text:
-        deals.append(f"{p.promo_text}: {eur(p.promo_price_cents)}")
     unit_price = f"{eur(p.unit_price_cents)} €/{p.unit_price_unit}" if p.unit_price_cents else ""
     pack = f"{p.pack_size:g} {p.unit}" if p.pack_size else "?"
-    return f"{p.rimi_id:>8}  {eur(p.price_cents):>6} €  {unit_price:>11}  {pack:>8}  {p.name}  {'; '.join(deals)}"
+    return f"{p.rimi_id:>8}  {eur(p.price_cents):>6} €  {unit_price:>11}  {pack:>8}  {p.name}  {deals(p)}"
 
 
 def cmd_search(args: argparse.Namespace) -> None:
