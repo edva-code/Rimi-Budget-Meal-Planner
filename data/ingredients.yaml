@@ -29,3 +29,244 @@ eggs:
   perishable_days: 21
   kcal_per_100: 143
   protein_per_100: 12.6
+
+rice:
+  rimi_id: "804297"
+  display_name: "Ilgagrūdžiai ryžiai RIMI BASIC, 800 g"
+  unit: g
+  category: grains
+  kcal_per_100: 350
+  protein_per_100: 7
+
+oats:
+  rimi_id: "809236"
+  display_name: "Avižiniai dribsniai RIMI SMART, 400 g"
+  unit: g
+  category: grains
+  kcal_per_100: 370
+  protein_per_100: 13
+
+pasta:
+  rimi_id: "146791"
+  display_name: "Makaronai PASAKA, sraigteliai, 400 g"
+  unit: g
+  category: grains
+  kcal_per_100: 350
+  protein_per_100: 12
+
+flour:
+  rimi_id: "809126"
+  display_name: "Kvietiniai miltai RIMI SMART, 2 kg"
+  unit: g
+  category: grains
+  kcal_per_100: 340
+  protein_per_100: 10
+
+rye_bread:
+  rimi_id: "4005638"
+  display_name: "Juoda duona BOČIŲ, 800 g"
+  unit: g
+  category: bakery
+  perishable_days: 5
+  kcal_per_100: 220
+  protein_per_100: 6
+
+red_lentils:
+  rimi_id: "816261"
+  display_name: "Skaldyti raudonieji lęšiai RIMI, 400 g"
+  unit: g
+  category: legumes
+  kcal_per_100: 340
+  protein_per_100: 24
+
+red_beans:
+  rimi_id: "808449"
+  display_name: "Raudonosios pupelės RIMI, 400 g / 240 g"
+  unit: g
+  category: legumes
+  kcal_per_100: 100
+  protein_per_100: 7
+  alternatives: ["812296"]
+
+green_peas:
+  rimi_id: "804235"
+  display_name: "Konserv. žal. žirneliai RIMI SMART, 690 g / 450 g"
+  unit: g
+  category: legumes
+  kcal_per_100: 70
+  protein_per_100: 4.5
+
+chicken:
+  rimi_id: "805593"
+  display_name: "Viščiukų broil. ketvirčiai RIMI, A kl., 1 kg"
+  unit: g
+  category: meat
+  perishable_days: 3
+  kcal_per_100: 170   # with bone and skin
+  protein_per_100: 16
+  alternatives: ["816924"]
+
+pork_mince:
+  rimi_id: "815631"
+  display_name: "Kiaulienos faršas, atšaldyt. RIMI SMART, 350 g"
+  unit: g
+  category: meat
+  perishable_days: 2
+  kcal_per_100: 260
+  protein_per_100: 16
+  alternatives: ["818038"]
+
+cottage_cheese:
+  rimi_id: "813690"
+  display_name: "Liesa varškė RIMI, 180 g"
+  unit: g
+  category: dairy
+  perishable_days: 7
+  kcal_per_100: 80
+  protein_per_100: 18
+  alternatives: ["814557"]
+
+kefir:
+  rimi_id: "804862"
+  display_name: "Kefyras RIMI SMART, 2,5 % rieb., 0,9 kg"
+  unit: g
+  category: dairy
+  perishable_days: 7
+  kcal_per_100: 50
+  protein_per_100: 3
+  alternatives: ["817693"]
+
+yogurt:
+  rimi_id: "815148"
+  display_name: "Natūralus jogurtas RIMI, 1 kg"
+  unit: g
+  category: dairy
+  perishable_days: 10
+  kcal_per_100: 60
+  protein_per_100: 3.5
+
+sour_cream:
+  rimi_id: "814672"
+  display_name: "Grietinė RIMI SMART, 30 % rieb., 400 g"
+  unit: g
+  category: dairy
+  perishable_days: 10
+  kcal_per_100: 290
+  protein_per_100: 2.5
+
+cheese:
+  rimi_id: "812217"
+  display_name: "Sūris RIMI SMART TILSIT 45%, 250 g"
+  unit: g
+  category: dairy
+  perishable_days: 21
+  kcal_per_100: 340
+  protein_per_100: 25
+
+margarine:
+  rimi_id: "811552"
+  display_name: "Lengvas margarinas RIMI SMART, 40 %, 400 g"
+  unit: g
+  category: fats
+  perishable_days: 60
+  kcal_per_100: 360
+  protein_per_100: 0
+
+sunflower_oil:
+  rimi_id: "804284"
+  display_name: "Saulėgrąžų aliejus RIMI SMART, 1 l"
+  unit: ml
+  category: fats
+  kcal_per_100: 820
+  protein_per_100: 0
+
+potatoes:
+  rimi_id: "244679"
+  display_name: "Bulvės, kg (sveriamos)"
+  unit: g
+  category: vegetables
+  pack_size: 1000   # sold loose, priced per kg
+  perishable_days: 30
+  kcal_per_100: 77
+  protein_per_100: 2
+  alternatives: ["816008"]
+
+carrots:
+  rimi_id: "901581"
+  display_name: "Lietuviškos morkos RIMI, 1 kg"
+  unit: g
+  category: vegetables
+  perishable_days: 21
+  kcal_per_100: 41
+  protein_per_100: 0.9
+
+onions:
+  rimi_id: "937071"
+  display_name: "Fasuoti lietuviški svogūnai, 1 kg"
+  unit: g
+  category: vegetables
+  perishable_days: 30
+  kcal_per_100: 40
+  protein_per_100: 1.1
+
+cabbage:
+  rimi_id: "244676"
+  display_name: "Lietuviški baltagūžiai kopūstai, 1 kg"
+  unit: g
+  category: vegetables
+  perishable_days: 21
+  kcal_per_100: 25
+  protein_per_100: 1.3
+
+beets:
+  rimi_id: "920730"
+  display_name: "Lietuviški burokėliai, 1 kg"
+  unit: g
+  category: vegetables
+  perishable_days: 30
+  kcal_per_100: 43
+  protein_per_100: 1.6
+
+cucumber:
+  rimi_id: "975432"
+  display_name: "Lietuviškas ilgavaisis agurkas RIMI, 1 vnt."
+  unit: pcs
+  grams_per_pcs: 300
+  category: vegetables
+  perishable_days: 7
+  kcal_per_100: 15
+  protein_per_100: 0.7
+
+canned_tomatoes:
+  rimi_id: "807738"
+  display_name: "Nulupti pomidorai RIMI SMART, 800 g"
+  unit: g
+  category: vegetables
+  kcal_per_100: 20
+  protein_per_100: 1
+
+frozen_vegetables:
+  rimi_id: "811587"
+  display_name: "Šald. daržovių mišinys sriubai RIMI, 400 g"
+  unit: g
+  category: frozen
+  kcal_per_100: 35
+  protein_per_100: 1.5
+
+apples:
+  rimi_id: "269163"
+  display_name: "Obuoliai Champion, 1 kg"
+  unit: g
+  category: fruit
+  perishable_days: 21
+  kcal_per_100: 52
+  protein_per_100: 0.3
+
+bananas:
+  rimi_id: "270939"
+  display_name: "Bananai Cavendish, 1 kg"
+  unit: g
+  category: fruit
+  perishable_days: 5
+  kcal_per_100: 89
+  protein_per_100: 1.1

@@ -60,10 +60,10 @@ def test_typos_get_suggestions(data_dir):
 
 def test_unknown_ingredient_in_recipe_and_pantry(data_dir):
     edit(data_dir, "recipes.yaml", lambda d: d["buckwheat_with_eggs"]["ingredients"].update(egs=2))
-    edit(data_dir, "pantry.yaml", lambda d: d.update(rice=500))
+    edit(data_dir, "pantry.yaml", lambda d: d.update(salt=500))
     msg = errors_of(data_dir)
     assert "recipes.yaml: buckwheat_with_eggs: unknown ingredient 'egs' (did you mean 'eggs'?)" in msg
-    assert "pantry.yaml: unknown ingredient 'rice'" in msg
+    assert "pantry.yaml: unknown ingredient 'salt'" in msg
 
 
 def test_all_problems_reported_together(data_dir):
@@ -83,8 +83,8 @@ def test_all_problems_reported_together(data_dir):
 
 
 def test_slot_without_recipe(data_dir):
-    edit(data_dir, "settings.yaml", lambda d: d.update(excluded_tags=["high_protein"]))
-    assert "no usable recipe for meal slot 'lunch'" in errors_of(data_dir)
+    edit(data_dir, "settings.yaml", lambda d: d.update(meal_slots=["breakfast", "snack"]))
+    assert "no usable recipe for meal slot 'snack'" in errors_of(data_dir)
 
 
 def test_invalid_yaml_and_missing_files(data_dir):
