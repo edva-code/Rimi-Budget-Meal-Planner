@@ -129,3 +129,10 @@ def _recipes_page():
     from app import recipes_page
 
     recipes_page()
+
+
+def test_promo_badge_colors():
+    from app import promo_badge
+    assert promo_badge("Mano Rimi") == ":violet-badge[Mano Rimi]"
+    assert promo_badge("deal not taken: 2 už 3") == ":gray-badge[deal not taken: 2 už 3]"
+    assert promo_badge("sale, was 2.00 €") == ":red-badge[sale, was 2.00 €]"
