@@ -1,14 +1,20 @@
-"""Command line entry point: python cli.py search "pienas"."""
+"""Command line entry point: python cli.py search "pienas" | update-prices."""
 
 from __future__ import annotations
 
 import argparse
 import logging
+import sys
 from pathlib import Path
 
-from planner.scraper import Product, RimiScraper
+from planner.models import DataError, load_data
+from planner.prices import connect, current_product, is_unusually_low, update_all
+from planner.scraper import Product, RimiScraper, ScraperError
 
-LOG_FILE = Path(__file__).parent / "logs" / "scraper.log"
+ROOT = Path(__file__).parent
+LOG_FILE = ROOT / "logs" / "scraper.log"
+DATA_DIR = ROOT / "data"
+DB_FILE = DATA_DIR / "prices.db"
 
 
 def setup_logging() -> None:
@@ -48,15 +54,40 @@ def cmd_search(args: argparse.Namespace) -> None:
         print(format_product(p))
 
 
+def cmd_update_prices(args: argparse.Namespace) -> None:
+    data = load_data(DATA_DIR)
+    conn = connect(DB_FILE)
+    result = update_all(
+        conn, data.ingredients, RimiScraper(),
+        progress=lambda i, n, key: print(f"\r[{i + 1}/{n}] {key:<30}", end="", flush=True),
+    )
+    print(f"\rFetched {result.fetched}, cached {result.cached} (refreshed at most once a day).")
+    for key, ingredient in data.ingredients.items():
+        record = current_product(conn, ingredient)
+        if record is None:
+            print(f"{key:<16} no price known")
+            continue
+        low = "  << unusually low" if is_unusually_low(conn, record.product.rimi_id) else ""
+        print(f"{key:<16} {record.fetched_at.astimezone():%Y-%m-%d %H:%M}  {format_product(record.product)}{low}")
+    if result.unavailable:
+        print(f"Not on Rimi (nor alternatives): {', '.join(result.unavailable)}")
+    if result.failed:
+        print(f"Update failed, showing last known price: {', '.join(result.failed)} (see {LOG_FILE})")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Rimi budget meal planner")
     sub = parser.add_subparsers(required=True)
     search = sub.add_parser("search", help="search Rimi products")
     search.add_argument("query")
     search.set_defaults(func=cmd_search)
+    sub.add_parser("update-prices", help="refresh prices of all ingredients").set_defaults(func=cmd_update_prices)
     args = parser.parse_args()
     setup_logging()
-    args.func(args)
+    try:
+        args.func(args)
+    except (DataError, ScraperError) as e:
+        sys.exit(str(e))
 
 
 if __name__ == "__main__":

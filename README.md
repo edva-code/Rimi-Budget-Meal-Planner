@@ -13,7 +13,7 @@ list.
 - [x] Project setup (Python 3.13, uv, folder layout)
 - [x] Scraper: Rimi search and product prices, tested with saved HTML
 - [x] Data models and YAML loading with validation
-- [ ] Price database, `update-prices` command and caching
+- [x] Price database, `update-prices` command and caching
 - [ ] Optimizer (PuLP) with sample recipes and ingredients
 - [ ] Shopping list with Markdown and CSV export
 - [ ] Streamlit UI
