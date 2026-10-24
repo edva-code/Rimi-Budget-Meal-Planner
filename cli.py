@@ -11,6 +11,7 @@ from planner.models import DataError, load_data
 from planner.optimizer import PlanError, make_plan
 from planner.prices import connect, current_product, is_unusually_low, update_all
 from planner.scraper import Product, RimiScraper, ScraperError
+from planner.shopping_list import build, to_csv, to_markdown
 
 ROOT = Path(__file__).parent
 LOG_FILE = ROOT / "logs" / "scraper.log"
@@ -83,22 +84,24 @@ def cmd_plan(args: argparse.Namespace) -> None:
     if args.people is not None:
         data.settings.people = args.people
     conn = connect(DB_FILE)
-    products = {k: r.product for k, i in data.ingredients.items() if (r := current_product(conn, i))}
+    records = {k: r for k, i in data.ingredients.items() if (r := current_product(conn, i))}
+    products = {k: r.product for k, r in records.items()}
     if not products:
         sys.exit("No prices known yet: run `python cli.py update-prices` first.")
     plan = make_plan(data, products)
     names = {k: r.name for k, r in data.recipes.items()}
     for day, meals in enumerate(plan.days, 1):
         print(f"Day {day}: " + " | ".join(f"{slot}: {names[r]}" for slot, r in meals.items()))
-    print("\nShopping list:")
-    for key, n in sorted(plan.packs.items()):
-        price, pack = plan.offers[key]
-        unit = data.ingredients[key].unit
-        print(f"  {n} × {data.ingredients[key].display_name} ({round(pack):g} {unit})  {eur(n * price):>6} €")
-    print(f"Total {eur(plan.cost_cents)} € of {eur(data.settings.weekly_budget_cents)} € budget")
     print(f"Per person per day: {plan.kcal_per_person_day:.0f} kcal, {plan.protein_per_person_day:.0f} g protein")
     for key, reason in plan.skipped.items():
         print(f"Skipped {names[key]}: {reason}")
+    as_of = min(records[k].fetched_at for k in plan.packs)  # oldest price the list relies on
+    shopping = build(data, plan, products, as_of)
+    print("\n" + to_markdown(shopping, links=False))
+    for path, text in ((args.md, to_markdown(shopping)), (args.csv, to_csv(shopping))):
+        if path:
+            path.write_text(text, encoding="utf-8")
+            print(f"Wrote {path}")
 
 
 def main() -> None:
@@ -111,6 +114,8 @@ def main() -> None:
     plan = sub.add_parser("plan", help="plan the cheapest week from the last known prices")
     plan.add_argument("--budget", type=float, help="weekly budget in EUR (default: settings.yaml)")
     plan.add_argument("--people", type=int, help="number of people (default: settings.yaml)")
+    plan.add_argument("--md", type=Path, metavar="PATH", help="also write the shopping list as Markdown")
+    plan.add_argument("--csv", type=Path, metavar="PATH", help="also write the shopping list as CSV")
     plan.set_defaults(func=cmd_plan)
     args = parser.parse_args()
     setup_logging()
