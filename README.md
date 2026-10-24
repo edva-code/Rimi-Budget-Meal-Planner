@@ -16,5 +16,5 @@ list.
 - [x] Price database, `update-prices` command and caching
 - [x] Optimizer (PuLP) with sample recipes and ingredients, `plan` command
 - [x] Shopping list with Markdown and CSV export (`plan --md list.md --csv list.csv`)
-- [ ] Streamlit UI
+- [x] Streamlit UI
 - [ ] Extras: promo-aware planning, perishable scheduling, "use up my pantry" mode
