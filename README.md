@@ -14,7 +14,7 @@ list.
 - [x] Scraper: Rimi search and product prices, tested with saved HTML
 - [x] Data models and YAML loading with validation
 - [x] Price database, `update-prices` command and caching
-- [ ] Optimizer (PuLP) with sample recipes and ingredients
+- [x] Optimizer (PuLP) with sample recipes and ingredients, `plan` command
 - [ ] Shopping list with Markdown and CSV export
 - [ ] Streamlit UI
 - [ ] Extras: promo-aware planning, perishable scheduling, "use up my pantry" mode
