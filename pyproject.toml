@@ -1,0 +1,19 @@
+[project]
+name = "rimi-planner"
+version = "0.1.0"
+description = "Weekly budget meal planner using Rimi.lt prices"
+requires-python = ">=3.11"
+dependencies = [
+    "beautifulsoup4>=4.15.0",
+    "pyyaml>=6.0.3",
+    "requests>=2.34.2",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
