@@ -174,3 +174,430 @@ cold_beet_soup:
     - "Išvirkite burokėlius, kiaušinius ir bulves."
     - "Burokėlius ir agurką sutarkuokite, sumaišykite su kefyru."
     - "Patiekite su kiaušiniais, pupelėmis ir karštomis bulvėmis."
+
+semolina_porridge:
+  name: "Manų košė su uogiene"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 10
+  tags: [vegetarian]
+  ingredients:
+    semolina: 100
+    milk: 600
+    butter: 10
+    jam: 60
+  steps:
+    - "Užvirinkite pieną ir plona srovele, nuolat maišydami, suberkite manų kruopas."
+    - "Virkite 3–4 min., kol sutirštės, įdėkite sviesto."
+    - "Patiekite su uogiene."
+
+millet_porridge:
+  name: "Sorų košė su obuoliais ir medumi"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 25
+  tags: [vegetarian]
+  ingredients:
+    millet: 150
+    milk: 500
+    apples: 200
+    honey: 30
+  steps:
+    - "Sorų kruopas nuplaukite karštu vandeniu."
+    - "Virkite piene ant silpnos ugnies apie 20 min."
+    - "Įmaišykite tarkuotą obuolį ir pagardinkite medumi."
+
+rice_porridge:
+  name: "Ryžių košė su razinomis"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 30
+  tags: [vegetarian]
+  ingredients:
+    rice: 150
+    milk: 700
+    raisins: 50
+    sugar: 20
+    butter: 10
+  steps:
+    - "Ryžius virkite piene ant silpnos ugnies, dažnai maišydami, apie 25 min."
+    - "Paskutines 5 min. įberkite razinų ir cukraus."
+    - "Patiekite su sviestu."
+
+blueberry_oatmeal:
+  name: "Avižinė košė su šilauogėmis"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 10
+  tags: [vegetarian]
+  ingredients:
+    oats: 160
+    milk: 500
+    blueberries: 150
+    honey: 20
+  steps:
+    - "Avižas virkite piene 5 min."
+    - "Įmaišykite šilauoges ir pagardinkite medumi."
+
+peanut_banana_oatmeal:
+  name: "Avižinė košė su žemės riešutų kremu ir bananu"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 10
+  tags: [vegetarian]
+  ingredients:
+    oats: 160
+    milk: 500
+    peanut_cream: 40
+    bananas: 240
+  steps:
+    - "Avižas virkite piene 5 min."
+    - "Įmaišykite žemės riešutų kremą, ant viršaus sudėkite banano griežinėlius."
+
+eggs_with_tomatoes:
+  name: "Kiaušinienė su pomidorais ir ruginė duona"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 10
+  tags: [vegetarian]
+  ingredients:
+    eggs: 5
+    tomatoes: 250
+    butter: 10
+    rye_bread: 120
+  steps:
+    - "Keptuvėje ant sviesto pakepinkite pomidorų skilteles."
+    - "Įmuškite kiaušinius, pasūdykite ir kepkite, kol sustings."
+    - "Patiekite su rugine duona."
+
+eggs_with_bacon:
+  name: "Kiaušinienė su šonine"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 15
+  tags: [high_protein]
+  ingredients:
+    eggs: 4
+    bacon: 100
+    rye_bread: 120
+  steps:
+    - "Šoninę supjaustykite juostelėmis ir apkepkite, kol taps traški."
+    - "Įmuškite kiaušinius ir kepkite iki norimo lygio."
+    - "Patiekite su rugine duona."
+
+shakshuka:
+  name: "Šakšuka"
+  meal_type: [breakfast, lunch]
+  servings: 2
+  prep_minutes: 25
+  tags: [vegetarian]
+  ingredients:
+    eggs: 4
+    tomato_sauce: 300
+    bell_pepper: 200
+    onions: 100
+    garlic: 0.25
+    sunflower_oil: 15
+    white_bread: 120
+  steps:
+    - "Aliejuje pakepinkite smulkintą svogūną, česnaką ir paprikos juosteles."
+    - "Supilkite pomidorų padažą ir troškinkite 10 min."
+    - "Padaže padarykite duobutes, įmuškite kiaušinius, uždenkite ir kaitinkite, kol baltymai sustings."
+    - "Patiekite su batonu."
+
+french_toast:
+  name: "Prancūziški skrebučiai su uogiene"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 15
+  tags: [vegetarian]
+  ingredients:
+    white_bread: 200
+    eggs: 3
+    milk: 150
+    butter: 20
+    jam: 60
+  steps:
+    - "Išplakite kiaušinius su pienu."
+    - "Batono riekes pamirkykite plakinyje ir kepkite ant sviesto iš abiejų pusių."
+    - "Patiekite su uogiene."
+
+pancakes_with_jam:
+  name: "Blynai su uogiene"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 30
+  tags: [vegetarian]
+  ingredients:
+    flour: 200
+    milk: 400
+    eggs: 2
+    sugar: 20
+    sunflower_oil: 20
+    jam: 100
+  steps:
+    - "Išplakite kiaušinius su cukrumi ir pienu, įmaišykite miltus iki vientisos tešlos."
+    - "Kepkite plonus blynus įkaitintoje, aliejumi pateptoje keptuvėje."
+    - "Patiekite su uogiene."
+
+crepes_with_curd:
+  name: "Lietiniai su varške"
+  meal_type: [breakfast, lunch]
+  servings: 3
+  prep_minutes: 40
+  tags: [vegetarian, high_protein]
+  ingredients:
+    flour: 150
+    milk: 350
+    eggs: 3
+    cottage_cheese: 360
+    sugar: 30
+    sour_cream: 100
+    sunflower_oil: 20
+  steps:
+    - "Iš miltų, pieno ir 2 kiaušinių išmaišykite tešlą ir iškepkite plonus blynus."
+    - "Varškę sutrinkite su likusiu kiaušiniu ir cukrumi."
+    - "Į kiekvieną blyną įdėkite varškės, susukite vokeliu ir apkepkite."
+    - "Patiekite su grietine."
+
+apple_pancakes:
+  name: "Obuoliniai blynai su kefyru"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 30
+  tags: [vegetarian]
+  ingredients:
+    flour: 150
+    kefir: 300
+    eggs: 2
+    apples: 300
+    sugar: 20
+    sunflower_oil: 30
+  steps:
+    - "Kefyrą išmaišykite su kiaušiniais, cukrumi ir miltais."
+    - "Įmaišykite stambiai tarkuotus obuolius."
+    - "Kepkite nedidelius blynelius aliejuje iš abiejų pusių."
+
+curd_with_honey:
+  name: "Varškė su grietine, medumi ir bananu"
+  meal_type: [breakfast, snack]
+  servings: 2
+  prep_minutes: 5
+  tags: [vegetarian, high_protein]
+  ingredients:
+    cottage_cheese: 360
+    sour_cream: 100
+    honey: 30
+    bananas: 120
+  steps:
+    - "Varškę išmaišykite su grietine."
+    - "Sudėkite banano griežinėlius ir užpilkite medumi."
+
+curd_casserole:
+  name: "Varškės apkepas su razinomis"
+  meal_type: [breakfast, snack]
+  servings: 4
+  prep_minutes: 50
+  tags: [vegetarian, high_protein]
+  ingredients:
+    cottage_cheese: 540
+    eggs: 3
+    semolina: 60
+    sugar: 50
+    raisins: 60
+    butter: 10
+    sour_cream: 100
+  steps:
+    - "Varškę sutrinkite su kiaušiniais, cukrumi ir manų kruopomis, įmaišykite razinas."
+    - "Supilkite į sviestu pateptą formą."
+    - "Kepkite 180 °C orkaitėje apie 35 min."
+    - "Patiekite su grietine."
+
+cheese_sandwiches:
+  name: "Ruginės duonos sumuštiniai su sūriu ir agurku"
+  meal_type: [breakfast, snack]
+  servings: 2
+  prep_minutes: 5
+  tags: [vegetarian]
+  ingredients:
+    rye_bread: 200
+    butter: 20
+    cheese: 100
+    cucumber: 1
+  steps:
+    - "Duoną aptepkite sviestu."
+    - "Uždėkite sūrio ir agurko griežinėlių."
+
+tuna_sandwiches:
+  name: "Sumuštiniai su tunu"
+  meal_type: [breakfast, snack]
+  servings: 2
+  prep_minutes: 10
+  tags: [high_protein]
+  ingredients:
+    white_bread: 200
+    tuna: 185
+    mayonnaise: 30
+    cucumber: 0.5
+  steps:
+    - "Nusunktą tuną sumaišykite su majonezu."
+    - "Užtepkite ant batono riekių ir uždėkite agurko griežinėlių."
+
+herring_on_rye:
+  name: "Ruginė duona su silke ir svogūnais"
+  meal_type: [breakfast, snack]
+  servings: 2
+  prep_minutes: 10
+  tags: [high_protein]
+  ingredients:
+    rye_bread: 200
+    butter: 20
+    herring: 150
+    onions: 50
+  steps:
+    - "Duoną aptepkite sviestu."
+    - "Uždėkite silkės gabalėlių ir plonų svogūno žiedų."
+
+egg_salad_toast:
+  name: "Kiaušinių salotos ant ruginės duonos"
+  meal_type: [breakfast, snack]
+  servings: 2
+  prep_minutes: 15
+  tags: [vegetarian]
+  ingredients:
+    eggs: 4
+    mayonnaise: 40
+    onions: 30
+    rye_bread: 200
+  steps:
+    - "Kiaušinius virkite 10 min., atvėsinkite ir susmulkinkite."
+    - "Sumaišykite su smulkintu svogūnu ir majonezu."
+    - "Užtepkite ant duonos riekių."
+
+berry_smoothie:
+  name: "Kefyro kokteilis su bananais ir šilauogėmis"
+  meal_type: [breakfast, snack]
+  servings: 2
+  prep_minutes: 5
+  tags: [vegetarian]
+  ingredients:
+    kefir: 500
+    bananas: 240
+    blueberries: 150
+    honey: 20
+  steps:
+    - "Visus produktus sutrinkite trintuvu iki vientisos masės."
+
+sausages_and_eggs:
+  name: "Dešrelės su kiaušiniene ir pomidorais"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 15
+  tags: [high_protein]
+  ingredients:
+    sausages: 200
+    eggs: 3
+    tomatoes: 200
+  steps:
+    - "Dešreles supjaustykite ir apkepkite keptuvėje."
+    - "Įmuškite kiaušinius ir kepkite, kol sustings."
+    - "Patiekite su pomidorų skiltelėmis."
+
+mushroom_omelette:
+  name: "Omletas su pievagrybiais ir sūriu"
+  meal_type: [breakfast, dinner]
+  servings: 2
+  prep_minutes: 15
+  tags: [vegetarian, high_protein]
+  ingredients:
+    eggs: 5
+    milk: 100
+    mushrooms: 200
+    cheese: 60
+    butter: 10
+  steps:
+    - "Pievagrybius supjaustykite ir apkepkite ant sviesto."
+    - "Kiaušinius išplakite su pienu, užpilkite ant grybų."
+    - "Užberkite tarkuoto sūrio ir kepkite uždengę, kol sustings."
+
+spinach_feta_omelette:
+  name: "Omletas su špinatais ir feta"
+  meal_type: [breakfast, dinner]
+  servings: 2
+  prep_minutes: 15
+  tags: [vegetarian, high_protein]
+  ingredients:
+    eggs: 5
+    milk: 100
+    spinach: 100
+    feta: 75
+    butter: 10
+  steps:
+    - "Ant sviesto trumpai pakepinkite špinatus, kol suglebs."
+    - "Užpilkite su pienu išplaktais kiaušiniais."
+    - "Užtrupinkite fetos ir kepkite uždengę, kol sustings."
+
+beans_on_toast:
+  name: "Pupelės pomidorų padaže su skrebučiais ir kiaušiniu"
+  meal_type: [breakfast, lunch]
+  servings: 2
+  prep_minutes: 10
+  tags: [vegetarian]
+  ingredients:
+    baked_beans: 415
+    eggs: 2
+    white_bread: 160
+  steps:
+    - "Pupeles pašildykite puode."
+    - "Batono riekes paskrudinkite, iškepkite kiaušinius."
+    - "Ant skrebučių sudėkite pupeles ir kiaušinį."
+
+hot_cheese_sandwiches:
+  name: "Karšti sumuštiniai su lydytu sūriu ir pomidorais"
+  meal_type: [breakfast, snack]
+  servings: 2
+  prep_minutes: 15
+  tags: [vegetarian]
+  ingredients:
+    white_bread: 200
+    processed_cheese: 100
+    tomatoes: 200
+  steps:
+    - "Batono riekes aptepkite lydytu sūriu."
+    - "Uždėkite pomidorų griežinėlių."
+    - "Kepkite 200 °C orkaitėje 8–10 min."
+
+sweet_couscous:
+  name: "Saldus kuskusas su kriaušėmis ir razinomis"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 10
+  tags: [vegetarian]
+  ingredients:
+    couscous: 150
+    milk: 400
+    pears: 300
+    raisins: 40
+    honey: 20
+  steps:
+    - "Kuskusą užpilkite karštu pienu ir palikite uždengtą 5 min."
+    - "Išpurenkite šakute, įmaišykite razinas ir kriaušių kubelius."
+    - "Pagardinkite medumi."
+
+liver_pate_toast:
+  name: "Vištienos kepenėlių paštetas ant ruginės duonos"
+  meal_type: [breakfast, snack]
+  servings: 4
+  prep_minutes: 30
+  tags: [high_protein]
+  ingredients:
+    chicken_liver: 400
+    onions: 100
+    carrots: 100
+    butter: 60
+    rye_bread: 400
+  steps:
+    - "Ant dalies sviesto pakepinkite svogūną ir tarkuotą morką."
+    - "Sudėkite kepenėles ir kepkite 10 min., kol iškeps."
+    - "Sutrinkite trintuvu su likusiu sviestu, pasūdykite."
+    - "Atvėsinkite ir tepkite ant duonos."
