@@ -1,0 +1,10 @@
+weekly_budget_eur: 40
+people: 2
+days: 7
+meal_slots: [breakfast, lunch, dinner]
+kcal_per_person_day: 2200
+protein_per_person_day: 90
+nutrition_tolerance: 0.10   # ±10%
+max_repeats: 3              # times one recipe may be cooked per week
+use_loyalty_prices: true    # use Mano Rimi prices when shown
+excluded_tags: []

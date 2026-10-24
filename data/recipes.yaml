@@ -1,0 +1,27 @@
+# Quantities are for the whole recipe (all servings), in each ingredient's unit.
+
+buckwheat_porridge:
+  name: "Grikių košė su pienu"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 20
+  tags: [vegetarian]
+  ingredients:
+    buckwheat: 150
+    milk: 400
+  steps:
+    - "Išvirkite grikius pasūdytame vandenyje."
+    - "Užpilkite šiltu pienu."
+
+buckwheat_with_eggs:
+  name: "Grikiai su kiaušiniais"
+  meal_type: [lunch, dinner]
+  servings: 2
+  prep_minutes: 25
+  tags: [vegetarian, high_protein]
+  ingredients:
+    buckwheat: 200
+    eggs: 4
+  steps:
+    - "Išvirkite grikius."
+    - "Iškepkite kiaušinius ir patiekite su grikiais."

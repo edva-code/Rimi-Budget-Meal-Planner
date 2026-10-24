@@ -1,0 +1,31 @@
+# Ingredient -> Rimi product mapping.
+# unit: g | ml | pcs. Nutrition is per 100 g (or 100 ml); pcs items need grams_per_pcs.
+# pack_size is optional: it overrides the size parsed from the Rimi product name.
+
+buckwheat:
+  rimi_id: "804281"
+  display_name: "Grikių kruopos RIMI SMART, 800 g"
+  unit: g
+  category: grains
+  kcal_per_100: 343
+  protein_per_100: 13
+
+milk:
+  rimi_id: "212915"
+  display_name: "Natūralus DVARO pienas, 3,5 % rieb., 1 l"
+  unit: ml
+  category: dairy
+  perishable_days: 5
+  kcal_per_100: 64
+  protein_per_100: 3.2
+  alternatives: ["4000040"]
+
+eggs:
+  rimi_id: "816707"
+  display_name: "Vištų kiaušiniai RIMI SMART, A/M, 10 vnt."
+  unit: pcs
+  grams_per_pcs: 55
+  category: protein
+  perishable_days: 21
+  kcal_per_100: 143
+  protein_per_100: 12.6
