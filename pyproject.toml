@@ -8,6 +8,7 @@ dependencies = [
     "pulp>=3,<3.3",
     "pyyaml>=6.0.3",
     "requests>=2.34.2",
+    "streamlit>=1.66.1",
 ]
 
 [dependency-groups]

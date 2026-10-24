@@ -84,6 +84,17 @@ def _eur(cents: int) -> str:
     return f"{cents / 100:.2f} €"
 
 
+def line_text(line: Line, links: bool = True) -> str:
+    """"2 × name — 1.00 € each = 2.00 € (promo)", with the name linked to Rimi if links."""
+    name = f"[{line.name}]({line.url})" if links else line.name
+    promo = f" ({line.promo})" if line.promo else ""
+    return f"{line.packs} × {name} — {_eur(line.price_cents)} each = {_eur(line.total_cents)}{promo}"
+
+
+def total_text(sl: ShoppingList) -> str:
+    return f"**Total {_eur(sl.total_cents)}** of {_eur(sl.budget_cents)} budget, {_eur(sl.remaining_cents)} remaining."
+
+
 def to_markdown(sl: ShoppingList, links: bool = True) -> str:
     """Checklist grouped by category; links=False for the terminal."""
     out = ["# Shopping list"]
@@ -94,13 +105,8 @@ def to_markdown(sl: ShoppingList, links: bool = True) -> str:
         if line.category != category:
             category = line.category
             out += ["", f"## {category}"]
-        name = f"[{line.name}]({line.url})" if links else line.name
-        promo = f" ({line.promo})" if line.promo else ""
-        out.append(f"- [ ] {line.packs} × {name} — {_eur(line.price_cents)} each = {_eur(line.total_cents)}{promo}")
-    out += [
-        "",
-        f"**Total {_eur(sl.total_cents)}** of {_eur(sl.budget_cents)} budget, {_eur(sl.remaining_cents)} remaining.",
-    ]
+        out.append(f"- [ ] {line_text(line, links)}")
+    out += ["", total_text(sl)]
     if sl.leftovers:
         out += ["", "## Left over after the week"]
         out += [f"- {name}: {round(qty):g} {unit}" for name, (qty, unit) in sl.leftovers.items()]
