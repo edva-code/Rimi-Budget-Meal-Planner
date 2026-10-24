@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 
 from planner.models import DataError, load_data
-from planner.optimizer import PlanError, make_plan
+from planner.optimizer import PlanError, late_text, make_plan
 from planner.prices import connect, current_product, is_unusually_low, update_all
 from planner.scraper import Product, RimiScraper, ScraperError
 from planner.shopping_list import build, to_csv, to_markdown
@@ -88,6 +88,8 @@ def cmd_plan(args: argparse.Namespace) -> None:
         data.settings.weekly_budget_eur = args.budget
     if args.people is not None:
         data.settings.people = args.people
+    if args.use_up_pantry:
+        data.settings.use_up_pantry = True
     conn = connect(DB_FILE)
     records = {k: r for k, i in data.ingredients.items() if (r := current_product(conn, i))}
     products = {k: r.product for k, r in records.items()}
@@ -100,6 +102,8 @@ def cmd_plan(args: argparse.Namespace) -> None:
     print(f"Per person per day: {plan.kcal_per_person_day:.0f} kcal, {plan.protein_per_person_day:.0f} g protein")
     for key, reason in plan.skipped.items():
         print(f"Skipped {names[key]}: {reason}")
+    for key, day in plan.late.items():
+        print("Warning: " + late_text(data, key, day))
     as_of = min(records[k].fetched_at for k in plan.packs)  # oldest price the list relies on
     shopping = build(data, plan, products, as_of)
     print("\n" + to_markdown(shopping, links=False))
@@ -119,6 +123,7 @@ def main() -> None:
     plan = sub.add_parser("plan", help="plan the cheapest week from the last known prices")
     plan.add_argument("--budget", type=float, help="weekly budget in EUR (default: settings.yaml)")
     plan.add_argument("--people", type=int, help="number of people (default: settings.yaml)")
+    plan.add_argument("--use-up-pantry", action="store_true", help="prefer recipes that use pantry.yaml stock")
     plan.add_argument("--md", type=Path, metavar="PATH", help="also write the shopping list as Markdown")
     plan.add_argument("--csv", type=Path, metavar="PATH", help="also write the shopping list as CSV")
     plan.set_defaults(func=cmd_plan)

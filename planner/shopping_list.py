@@ -47,11 +47,13 @@ class ShoppingList:
 
 def promo_label(product: Product, price_cents: int) -> str:
     """What makes this price special, or "" for the regular price."""
+    if product.promo_text and price_cents == product.promo_price_cents:
+        return product.promo_text
     if product.loyalty_price_cents and price_cents == product.loyalty_price_cents:
         return "Mano Rimi"
     if product.regular_price_cents:
         return f"sale, was {product.regular_price_cents / 100:.2f} €"
-    return product.promo_text or ""  # ponytail: multi-buy deals are flagged but not priced in
+    return f"deal not taken: {product.promo_text}" if product.promo_text else ""
 
 
 def build(
@@ -60,7 +62,7 @@ def build(
     """Shopping list for a plan; products are the Rimi products the plan was priced with."""
     lines = []
     for key, packs in plan.packs.items():
-        ingredient, product, (price, pack) = data.ingredients[key], products[key], plan.offers[key]
+        ingredient, product, (price, pack, _) = data.ingredients[key], products[key], plan.offers[key]
         lines.append(Line(
             key, ingredient.category, product.name, packs, price, pack, ingredient.unit, product.url,
             promo_label(product, price),

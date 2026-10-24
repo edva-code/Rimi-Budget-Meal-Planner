@@ -7,4 +7,5 @@ protein_per_person_day: 90
 nutrition_tolerance: 0.10   # ±10%
 max_repeats: 3              # times one recipe may be cooked per week
 use_loyalty_prices: true    # use Mano Rimi prices when shown
+use_up_pantry: false        # prefer recipes that use pantry.yaml stock, even if a bit dearer
 excluded_tags: []

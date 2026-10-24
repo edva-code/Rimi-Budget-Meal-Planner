@@ -148,6 +148,7 @@ class Settings:
     max_repeats: int = 3  # times one recipe may be cooked per week
     nutrition_tolerance: float = 0.10  # ±10% of the kcal/protein targets
     use_loyalty_prices: bool = False
+    use_up_pantry: bool = False  # prefer recipes that use what's at home, even at some extra cost
     excluded_tags: list[str] = field(default_factory=list)
 
     def problems(self) -> list[str]:
@@ -165,8 +166,9 @@ class Settings:
             p += [f"unknown meal slot {m!r}{_hint(str(m), MEAL_TYPES)}" for m in self.meal_slots if m not in MEAL_TYPES]
         if not (_is_num(self.nutrition_tolerance, strict=False) and self.nutrition_tolerance < 1):
             p.append("nutrition_tolerance must be a fraction like 0.10")
-        if not isinstance(self.use_loyalty_prices, bool):
-            p.append("use_loyalty_prices must be true or false")
+        for name in ("use_loyalty_prices", "use_up_pantry"):
+            if not isinstance(getattr(self, name), bool):
+                p.append(f"{name} must be true or false")
         if not (isinstance(self.excluded_tags, list) and all(isinstance(t, str) for t in self.excluded_tags)):
             p.append("excluded_tags must be a list of text")
         return p

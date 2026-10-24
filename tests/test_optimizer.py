@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 from planner.models import load_data
-from planner.optimizer import PlanError, _schedule, make_plan, offer
+from planner.optimizer import Offer, PlanError, _schedule, late_perishables, make_plan, offer, paid
 from planner.scraper import Product
 
 DATA = Path(__file__).parent.parent / "data"
@@ -96,3 +96,34 @@ def test_locked_meals_stay_put(data, products):
     assert all(plan.days[d][slot] == r for (d, slot), r in locks.items())
     with pytest.raises(PlanError, match="Can't lock oatmeal for dinner"):
         make_plan(data, products, {(0, "dinner"): "oatmeal"})
+
+
+def test_multi_buy_deal_is_priced_in(data, products):
+    plain = make_plan(data, products)
+    deals = {k: replace(p, promo_text="2 ir daugiau -30%", promo_price_cents=70) for k, p in products.items()}
+    assert offer(data.ingredients["eggs"], deals["eggs"], False).deal == (2, 70)
+    assert offer(data.ingredients["eggs"], replace(deals["eggs"], promo_text="2 už 1,40"), False).deal is None
+    plan = make_plan(data, deals)
+    for i, n in plan.packs.items():
+        assert plan.offers[i].price_cents == (70 if n >= 2 else 100)
+    assert plan.cost_cents == sum(plan.offers[i].price_cents * n for i, n in plan.packs.items())
+    assert plan.cost_cents < plain.cost_cents
+    assert paid(Offer(100, 500, (3, 70)), 2) == Offer(100, 500)
+
+
+def test_late_perishables(data):
+    key, keeps = min(((k, i.perishable_days) for k, i in data.ingredients.items() if i.perishable_days), key=lambda t: t[1])
+    recipe = next(r for r, rec in data.recipes.items() if key in rec.ingredients)
+    assert key not in late_perishables(data, [{"dinner": recipe}] * keeps)
+    assert late_perishables(data, [{"dinner": recipe}] * (keeps + 2))[key] == keeps + 2
+
+
+def test_use_up_pantry_uses_more_of_it(data, products):
+    def used(plan, i):
+        return sum(n * data.recipes[r].ingredients.get(i, 0) for (r, _), n in plan.cooks.items())
+
+    data.pantry = {"potatoes": 2000}
+    off = make_plan(data, products)
+    data.settings.use_up_pantry = True
+    on = make_plan(data, products)
+    assert used(on, "potatoes") > used(off, "potatoes")

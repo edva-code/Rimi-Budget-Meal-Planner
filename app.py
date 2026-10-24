@@ -10,7 +10,7 @@ import cli
 from planner.models import (
     MEAL_TYPES, UNITS, DataError, Ingredient, PlannerData, Recipe, append_ingredient, load_data, save_recipes,
 )
-from planner.optimizer import PlanError, make_plan, recipe_kcal, recipe_protein
+from planner.optimizer import PlanError, late_text, make_plan, recipe_kcal, recipe_protein
 from planner.prices import connect, current_product, history, is_unusually_low, save, update_all
 from planner.scraper import RimiScraper
 from planner.shopping_list import build, line_text, to_csv, to_markdown, total_text
@@ -24,6 +24,7 @@ def plan_inputs(data: PlannerData) -> None:
     s.people = c2.number_input("People", 1, 10, s.people)
     s.days = c3.number_input("Days", 1, 14, s.days)
     s.use_loyalty_prices = st.toggle("Use Mano Rimi prices", s.use_loyalty_prices)
+    s.use_up_pantry = st.toggle("Use up my pantry", s.use_up_pantry)
     if tags := sorted({t for r in data.recipes.values() for t in r.tags}):
         s.excluded_tags = st.multiselect("Leave out recipes tagged", tags, default=[t for t in s.excluded_tags if t in tags])
 
@@ -86,6 +87,8 @@ def plan_page() -> None:
         with st.expander(f"{len(plan.skipped)} recipe(s) left out"):
             for key, reason in plan.skipped.items():
                 st.markdown(f"- {data.recipes[key].name}: {reason}")
+    for key, day in plan.late.items():
+        st.warning(late_text(data, key, day))
 
 
 def shopping_page() -> None:

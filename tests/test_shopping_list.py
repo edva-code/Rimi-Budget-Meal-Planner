@@ -62,7 +62,9 @@ def test_promo_label():
     assert promo_label(replace(base, loyalty_price_cents=129), 129) == "Mano Rimi"
     assert promo_label(replace(base, loyalty_price_cents=129), 155) == ""  # loyalty prices turned off
     assert promo_label(replace(base, regular_price_cents=199), 155) == "sale, was 1.99 €"
-    assert promo_label(replace(base, promo_text="2 už 2,50"), 155) == "2 už 2,50"
+    assert promo_label(replace(base, promo_text="2 už 2,50"), 155) == "deal not taken: 2 už 2,50"
+    deal = replace(base, promo_text="2 ir daugiau -30%", promo_price_cents=109)
+    assert promo_label(deal, 109) == "2 ir daugiau -30%"
 
 
 def test_markdown(shopping):

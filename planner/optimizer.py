@@ -2,15 +2,18 @@
 
 Variables: cooks[recipe, slot] = times a recipe is cooked for a meal slot
 (each cook makes recipe.servings servings); packs[ingredient] = packs to buy.
-Minimizes spend plus small penalties for leftover perishables and extra
-servings, minus a small bonus per distinct recipe used. The cooked meals are
-then spread over the days (_schedule).
+Multi-buy deals ("2 ir daugiau -30%") get their own pack variable that is
+either 0 or at least the deal's minimum. Minimizes spend plus small penalties
+for leftover perishables and extra servings (and for unused pantry stock in
+use-up-pantry mode), minus a small bonus per distinct recipe used. The cooked
+meals are then spread over the days (_schedule).
 """
 
 from __future__ import annotations
 
+import re
 from collections import Counter
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import NamedTuple
 
 import pulp
@@ -21,6 +24,8 @@ from planner.scraper import Product
 LEFTOVER_PENALTY = 0.2  # × value of perishable food left over at the end of the week
 EXTRA_SERVING_PENALTY = 10  # cents per serving cooked beyond what is eaten
 VARIETY_BONUS = 30  # cents per distinct recipe used
+PANTRY_PENALTY = 1.0  # × shelf value of pantry stock left unused, in use-up-pantry mode
+MAX_DEAL_PACKS = 99
 TIME_LIMIT_S = 10
 KEEPS = 365  # shelf days of ingredients without perishable_days
 
@@ -32,6 +37,12 @@ class PlanError(Exception):
 class Offer(NamedTuple):
     price_cents: int
     pack: float  # pack size in the ingredient's unit
+    deal: tuple[int, int] | None = None  # (min packs, price per pack) of a multi-buy deal
+
+
+def paid(o: Offer, packs: int) -> Offer:
+    """The offer as charged at the till: the deal price applies to every pack once enough are bought."""
+    return Offer(o.deal[1], o.pack) if o.deal and packs >= o.deal[0] else Offer(o.price_cents, o.pack)
 
 
 @dataclass
@@ -44,6 +55,7 @@ class Plan:
     kcal_per_person_day: float
     protein_per_person_day: float
     skipped: dict[str, str]  # recipe key -> why it was left out
+    late: dict[str, int] = field(default_factory=dict)  # perishable ingredient key -> last day (1-based) eaten past its shelf life
 
 
 def offer(ingredient: Ingredient, product: Product, use_loyalty: bool) -> Offer | None:
@@ -57,7 +69,11 @@ def offer(ingredient: Ingredient, product: Product, use_loyalty: bool) -> Offer 
     if product.unit_price_cents and product.unit_price_unit in ("kg", "l") and ingredient.unit != "pcs":
         pack = min(pack, weight) if (weight := product.price_cents * 1000 / product.unit_price_cents) < 0.98 * pack else pack
     price = product.loyalty_price_cents if use_loyalty and product.loyalty_price_cents else product.price_cents
-    return Offer(price, pack)
+    deal = None
+    # ponytail: only "N ir daugiau" is known to give a per-pack price; other deal texts stay unpriced
+    if (m := re.match(r"(\d+) ir daugiau", product.promo_text or "")) and product.promo_price_cents and product.promo_price_cents < price:
+        deal = (int(m.group(1)), product.promo_price_cents)
+    return Offer(price, pack, deal)
 
 
 def recipe_kcal(data: PlannerData, recipe: Recipe) -> float:
@@ -86,16 +102,25 @@ def _solve(
     }
     ingredients = {i for r in recipes for i in r.ingredients}
     packs = {i: pulp.LpVariable(f"buy_{i}", 0, cat="Integer") for i in ingredients}
+    deals = {i: offers[i].deal for i in ingredients if offers[i].deal}
+    deal_packs = {i: pulp.LpVariable(f"deal_{i}", 0, cat="Integer") for i in deals}
+    bought = {i: packs[i] + deal_packs.get(i, 0) for i in ingredients}
     used = {i: pulp.lpSum(v * data.recipes[r].ingredients.get(i, 0) for (r, _), v in cooks.items()) for i in ingredients}
     servings = {k: v * data.recipes[k[0]].servings for k, v in cooks.items()}
-    spend = pulp.lpSum(offers[i].price_cents * packs[i] for i in ingredients)
+    spend = pulp.lpSum(offers[i].price_cents * packs[i] for i in ingredients) + pulp.lpSum(
+        price * deal_packs[i] for i, (_, price) in deals.items()
+    )
 
     for slot in s.meal_slots:
         prob += pulp.lpSum(v for (_, sl), v in servings.items() if sl == slot) >= need
     for k, v in servings.items():  # at most every other day, so no dish repeats on consecutive days
         prob += v <= s.people * ((s.days + 1) // 2)
     for i in ingredients:
-        prob += used[i] <= packs[i] * offers[i].pack + data.pantry.get(i, 0)
+        prob += used[i] <= bought[i] * offers[i].pack + data.pantry.get(i, 0)
+    for i, (n, _) in deals.items():  # deal packs are 0 or at least n
+        on = pulp.LpVariable(f"deal_on_{i}", cat="Binary")
+        prob += deal_packs[i] >= n * on
+        prob += deal_packs[i] <= MAX_DEAL_PACKS * on
     for r in recipes:
         prob += pulp.lpSum(v for (rk, _), v in cooks.items() if rk == r.key) <= s.max_repeats
     for k, days in Counter((r, slot) for (_, slot), r in (locks or {}).items()).items():
@@ -114,18 +139,25 @@ def _solve(
         prob += u <= pulp.lpSum(v for (rk, _), v in cooks.items() if rk == r)
     perishable = [i for i in ingredients if (data.ingredients[i].perishable_days or KEEPS) <= s.days]
     leftover_value = pulp.lpSum(
-        offers[i].price_cents / offers[i].pack * (packs[i] * offers[i].pack + data.pantry.get(i, 0) - used[i])
+        offers[i].price_cents / offers[i].pack * (bought[i] * offers[i].pack + data.pantry.get(i, 0) - used[i])
         for i in perishable
     )
+    pantry_left = {i: pulp.LpVariable(f"pantry_left_{i}", 0) for i in ingredients if s.use_up_pantry and data.pantry.get(i)}
+    for i, v in pantry_left.items():
+        prob += v >= data.pantry[i] - used[i]
+    unused_pantry = pulp.lpSum(offers[i].price_cents / offers[i].pack * v for i, v in pantry_left.items())
     extra = pulp.lpSum(servings.values()) - need * len(s.meal_slots)
-    prob += spend + LEFTOVER_PENALTY * leftover_value + EXTRA_SERVING_PENALTY * extra - VARIETY_BONUS * pulp.lpSum(uses.values())
+    prob += (
+        spend + LEFTOVER_PENALTY * leftover_value + PANTRY_PENALTY * unused_pantry + EXTRA_SERVING_PENALTY * extra
+        - VARIETY_BONUS * pulp.lpSum(uses.values())
+    )
 
     prob.solve(pulp.PULP_CBC_CMD(msg=False, timeLimit=TIME_LIMIT_S))
     if prob.sol_status not in (pulp.LpSolutionOptimal, pulp.LpSolutionIntegerFeasible):
         return None
     return (
         {k: n for k, v in cooks.items() if (n := round(v.value())) > 0},
-        {i: n for i, v in packs.items() if (n := round(v.value())) > 0},
+        {i: n for i in ingredients if (n := round(pulp.value(bought[i]))) > 0},
     )
 
 
@@ -171,6 +203,22 @@ def _schedule(
     return [{slot: weeks[slot][d] for slot in s.meal_slots} for d in range(s.days)]
 
 
+def late_perishables(data: PlannerData, days: list[dict[str, str]]) -> dict[str, int]:
+    """Perishable ingredients eaten after they keep, shopping once before day 1: key -> last day eaten (1-based)."""
+    late = {}
+    for day, meals in enumerate(days, 1):
+        for r in meals.values():
+            for i in data.recipes[r].ingredients:
+                if (keeps := data.ingredients[i].perishable_days) and day > keeps:
+                    late[i] = day
+    return late
+
+
+def late_text(data: PlannerData, key: str, day: int) -> str:
+    i = data.ingredients[key]
+    return f"{i.display_name} keeps {i.perishable_days} days but is eaten on day {day}: buy it mid-week or freeze it."
+
+
 def make_plan(
     data: PlannerData, products: dict[str, Product], locks: dict[tuple[int, str], str] | None = None
 ) -> Plan:
@@ -201,7 +249,7 @@ def make_plan(
     result = _solve(data, recipes, offers, s.weekly_budget_cents, locks=locks)
     if result is None:
         if cheapest := _solve(data, recipes, offers, None, locks=locks):
-            cost = sum(offers[i].price_cents * n for i, n in cheapest[1].items())
+            cost = sum(paid(offers[i], n).price_cents * n for i, n in cheapest[1].items())
             raise PlanError(f"Budget €{s.weekly_budget_cents / 100:.2f} is too low: the cheapest plan costs €{cost / 100:.2f}.")
         if _solve(data, recipes, offers, None, nutrition=False, locks=locks):
             raise PlanError(
@@ -212,13 +260,16 @@ def make_plan(
 
     cooks, packs = result
     eaters = s.people * s.days
+    days = _schedule(data, cooks, locks)
+    offers = {i: paid(offers[i], n) for i, n in packs.items()}
     return Plan(
-        days=_schedule(data, cooks, locks),
+        days=days,
         cooks=cooks,
         packs=packs,
-        offers={i: offers[i] for i in packs},
+        offers=offers,
         cost_cents=sum(offers[i].price_cents * n for i, n in packs.items()),
         kcal_per_person_day=sum(n * recipe_kcal(data, data.recipes[r]) for (r, _), n in cooks.items()) / eaters,
         protein_per_person_day=sum(n * recipe_protein(data, data.recipes[r]) for (r, _), n in cooks.items()) / eaters,
         skipped=skipped,
+        late=late_perishables(data, days),
     )
