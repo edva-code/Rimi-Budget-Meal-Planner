@@ -1,4 +1,4 @@
-"""Command line entry point: python cli.py search "pienas" | update-prices."""
+"""Command line entry point: python cli.py search "pienas" | update-prices | plan."""
 
 from __future__ import annotations
 
@@ -8,6 +8,7 @@ import sys
 from pathlib import Path
 
 from planner.models import DataError, load_data
+from planner.optimizer import PlanError, make_plan
 from planner.prices import connect, current_product, is_unusually_low, update_all
 from planner.scraper import Product, RimiScraper, ScraperError
 
@@ -75,6 +76,31 @@ def cmd_update_prices(args: argparse.Namespace) -> None:
         print(f"Update failed, showing last known price: {', '.join(result.failed)} (see {LOG_FILE})")
 
 
+def cmd_plan(args: argparse.Namespace) -> None:
+    data = load_data(DATA_DIR)
+    if args.budget is not None:
+        data.settings.weekly_budget_eur = args.budget
+    if args.people is not None:
+        data.settings.people = args.people
+    conn = connect(DB_FILE)
+    products = {k: r.product for k, i in data.ingredients.items() if (r := current_product(conn, i))}
+    if not products:
+        sys.exit("No prices known yet: run `python cli.py update-prices` first.")
+    plan = make_plan(data, products)
+    names = {k: r.name for k, r in data.recipes.items()}
+    for day, meals in enumerate(plan.days, 1):
+        print(f"Day {day}: " + " | ".join(f"{slot}: {names[r]}" for slot, r in meals.items()))
+    print("\nShopping list:")
+    for key, n in sorted(plan.packs.items()):
+        price, pack = plan.offers[key]
+        unit = data.ingredients[key].unit
+        print(f"  {n} × {data.ingredients[key].display_name} ({round(pack):g} {unit})  {eur(n * price):>6} €")
+    print(f"Total {eur(plan.cost_cents)} € of {eur(data.settings.weekly_budget_cents)} € budget")
+    print(f"Per person per day: {plan.kcal_per_person_day:.0f} kcal, {plan.protein_per_person_day:.0f} g protein")
+    for key, reason in plan.skipped.items():
+        print(f"Skipped {names[key]}: {reason}")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Rimi budget meal planner")
     sub = parser.add_subparsers(required=True)
@@ -82,11 +108,15 @@ def main() -> None:
     search.add_argument("query")
     search.set_defaults(func=cmd_search)
     sub.add_parser("update-prices", help="refresh prices of all ingredients").set_defaults(func=cmd_update_prices)
+    plan = sub.add_parser("plan", help="plan the cheapest week from the last known prices")
+    plan.add_argument("--budget", type=float, help="weekly budget in EUR (default: settings.yaml)")
+    plan.add_argument("--people", type=int, help="number of people (default: settings.yaml)")
+    plan.set_defaults(func=cmd_plan)
     args = parser.parse_args()
     setup_logging()
     try:
         args.func(args)
-    except (DataError, ScraperError) as e:
+    except (DataError, ScraperError, PlanError) as e:
         sys.exit(str(e))
 
 
