@@ -24,8 +24,11 @@ def data():
 
 @pytest.fixture
 def products(data):
-    """Every ingredient at 1 € per pack of 500 g/ml or 10 pcs."""
-    return {k: product(100, 10 if i.unit == "pcs" else 500, i.unit) for k, i in data.ingredients.items()}
+    """Every ingredient at 0.60–1.40 € per pack of 500 g/ml or 10 pcs.
+
+    Spread out like real prices: with all prices equal the solver drowns in tied plans."""
+    return {k: product(60 + n * 37 % 81, 10 if i.unit == "pcs" else 500, i.unit)
+            for n, (k, i) in enumerate(data.ingredients.items())}
 
 
 def test_plan_meets_budget_nutrition_and_variety(data, products):
@@ -100,12 +103,13 @@ def test_locked_meals_stay_put(data, products):
 
 def test_multi_buy_deal_is_priced_in(data, products):
     plain = make_plan(data, products)
-    deals = {k: replace(p, promo_text="2 ir daugiau -30%", promo_price_cents=70) for k, p in products.items()}
-    assert offer(data.ingredients["eggs"], deals["eggs"], False).deal == (2, 70)
+    deals = {k: replace(p, promo_text="2 ir daugiau -30%", promo_price_cents=p.price_cents * 7 // 10)
+             for k, p in products.items()}
+    assert offer(data.ingredients["eggs"], deals["eggs"], False).deal == (2, deals["eggs"].promo_price_cents)
     assert offer(data.ingredients["eggs"], replace(deals["eggs"], promo_text="2 už 1,40"), False).deal is None
     plan = make_plan(data, deals)
     for i, n in plan.packs.items():
-        assert plan.offers[i].price_cents == (70 if n >= 2 else 100)
+        assert plan.offers[i].price_cents == (deals[i].promo_price_cents if n >= 2 else deals[i].price_cents)
     assert plan.cost_cents == sum(plan.offers[i].price_cents * n for i, n in plan.packs.items())
     assert plan.cost_cents < plain.cost_cents
     assert paid(Offer(100, 500, (3, 70)), 2) == Offer(100, 500)
