@@ -72,6 +72,7 @@ def test_offer_pack_and_loyalty(data):
     loose = product(206, 1000, "g", 229, "kg")  # priced for ~0.9 kg, not the 1 kg in the name
     assert offer(chicken, loose, False).pack == pytest.approx(206 * 1000 / 229)
     assert offer(chicken, replace(loose, loyalty_price_cents=180), True).price_cents == 180
+    assert offer(chicken, product(179, 800, "g", 224, "kg"), False).pack == 800  # 799.1 g is just rounding
     eggs = replace(data.ingredients["eggs"], pack_size=None)
     assert offer(eggs, product(219, 500, "g"), False) is None  # pcs vs grams can't be converted
 

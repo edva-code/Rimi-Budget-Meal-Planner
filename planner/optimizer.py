@@ -51,9 +51,10 @@ def offer(ingredient: Ingredient, product: Product, use_loyalty: bool) -> Offer 
     # ponytail: g and ml are treated as 1:1; only pcs vs weight is refused.
     if pack is None or (not ingredient.pack_size and "pcs" in (product.unit, ingredient.unit) and product.unit != ingredient.unit):
         return None
-    # Loose produce is priced per estimated weight; trust whichever is dearer per gram.
+    # Loose produce is priced per estimated weight; trust it when clearly below the pack size
+    # (small gaps are just the unit price being rounded to cents).
     if product.unit_price_cents and product.unit_price_unit in ("kg", "l") and ingredient.unit != "pcs":
-        pack = min(pack, product.price_cents * 1000 / product.unit_price_cents)
+        pack = min(pack, weight) if (weight := product.price_cents * 1000 / product.unit_price_cents) < 0.98 * pack else pack
     price = product.loyalty_price_cents if use_loyalty and product.loyalty_price_cents else product.price_cents
     return Offer(price, pack)
 
