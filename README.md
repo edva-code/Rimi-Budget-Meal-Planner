@@ -17,4 +17,4 @@ list.
 - [x] Optimizer (PuLP) with sample recipes and ingredients, `plan` command
 - [x] Shopping list with Markdown and CSV export (`plan --md list.md --csv list.csv`)
 - [x] Streamlit UI
-- [ ] Extras: promo-aware planning, perishable scheduling, "use up my pantry" mode
+- [x] Extras: promo-aware planning, perishable scheduling, "use up my pantry" mode
