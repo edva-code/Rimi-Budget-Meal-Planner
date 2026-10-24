@@ -1546,3 +1546,257 @@ cauliflower_cheese_bake:
     - "Žiedinį kopūstą ir bulves pusiau išvirkite pasūdytame vandenyje."
     - "Sudėkite į kepimo formą, užpilkite grietinėlės ir kiaušinių mišiniu."
     - "Užberkite tarkuoto sūrio ir kepkite 190 °C orkaitėje 25 min."
+
+baked_apples_curd:
+  name: "Kepti obuoliai su varške ir medumi"
+  meal_type: [snack]
+  servings: 4
+  prep_minutes: 30
+  tags: [vegetarian]
+  ingredients:
+    apples: 600
+    cottage_cheese: 180
+    honey: 30
+    raisins: 40
+  steps:
+    - "Obuoliams išpjaukite sėklalizdžius."
+    - "Varškę išmaišykite su razinomis ir puse medaus, prikimškite obuolius."
+    - "Kepkite 180 °C orkaitėje apie 20 min., prieš patiekdami apšlakstykite likusiu medumi."
+
+curd_snack_banana:
+  name: "Varškės sūrelis su bananu"
+  meal_type: [snack]
+  servings: 4
+  prep_minutes: 2
+  tags: [vegetarian]
+  ingredients:
+    curd_snack: 180
+    bananas: 480
+  steps:
+    - "Patiekite po varškės sūrelį ir bananą."
+
+yogurt_blueberries_honey:
+  name: "Jogurtas su šilauogėmis ir medumi"
+  meal_type: [breakfast, snack]
+  servings: 4
+  prep_minutes: 5
+  tags: [vegetarian]
+  ingredients:
+    yogurt: 600
+    blueberries: 200
+    oats: 80
+    honey: 40
+  steps:
+    - "Jogurtą paskirstykite į dubenėlius."
+    - "Užberkite avižinių dribsnių ir šilauogių, apšlakstykite medumi."
+
+peanut_banana_toast:
+  name: "Skrebučiai su žemės riešutų kremu ir bananu"
+  meal_type: [breakfast, snack]
+  servings: 4
+  prep_minutes: 10
+  tags: [vegetarian]
+  ingredients:
+    white_bread: 240
+    peanut_cream: 80
+    bananas: 240
+  steps:
+    - "Batono riekeles paskrudinkite."
+    - "Užtepkite žemės riešutų kremo ir uždėkite banano griežinėlių."
+
+chickpea_spread_vegetables:
+  name: "Avinžirnių užtepėlė su daržovių lazdelėmis"
+  meal_type: [snack]
+  servings: 4
+  prep_minutes: 15
+  tags: [vegan]
+  ingredients:
+    chickpeas: 400
+    garlic: 0.5
+    lemons: 60
+    sunflower_oil: 30
+    carrots: 200
+    cucumber: 1
+    bell_pepper: 150
+  steps:
+    - "Nusausintus avinžirnius sutrinkite su česnaku, citrinos sultimis, aliejumi ir trupučiu vandens."
+    - "Morkas, agurką ir papriką supjaustykite lazdelėmis."
+    - "Daržoves patiekite su užtepėle."
+
+cottage_cheese_garlic_spread:
+  name: "Varškės užtepėlė su česnaku ant ruginės duonos"
+  meal_type: [breakfast, snack]
+  servings: 4
+  prep_minutes: 10
+  tags: [vegetarian, high_protein]
+  ingredients:
+    cottage_cheese: 540
+    sour_cream: 60
+    garlic: 0.25
+    cucumber: 1
+    rye_bread: 200
+  steps:
+    - "Varškę ištrinkite su grietine ir spaustu česnaku."
+    - "Užtepkite ant ruginės duonos riekių ir uždėkite agurko griežinėlių."
+
+pears_yogurt_honey:
+  name: "Kriaušės su jogurtu ir medumi"
+  meal_type: [snack]
+  servings: 4
+  prep_minutes: 5
+  tags: [vegetarian]
+  ingredients:
+    pears: 500
+    yogurt: 300
+    honey: 30
+  steps:
+    - "Kriaušes supjaustykite skiltelėmis."
+    - "Patiekite su jogurtu, apšlakstytu medumi."
+
+oat_raisin_cookies:
+  name: "Avižiniai sausainiai su razinomis"
+  meal_type: [snack]
+  servings: 8
+  prep_minutes: 35
+  tags: [vegetarian]
+  ingredients:
+    oats: 200
+    flour: 80
+    margarine: 100
+    sugar: 80
+    eggs: 1
+    raisins: 80
+  steps:
+    - "Margariną ištrinkite su cukrumi ir kiaušiniu."
+    - "Įmaišykite avižinius dribsnius, miltus ir razinas."
+    - "Šaukštu dėkite krūveles ant kepimo popieriaus ir kepkite 180 °C apie 15 min."
+
+carrot_apple_salad:
+  name: "Morkų ir obuolių salotos su razinomis"
+  meal_type: [snack]
+  servings: 4
+  prep_minutes: 10
+  tags: [vegetarian]
+  ingredients:
+    carrots: 400
+    apples: 200
+    raisins: 50
+    sour_cream: 100
+  steps:
+    - "Morkas ir obuolius sutarkuokite stambia tarka."
+    - "Įmaišykite razinas ir pagardinkite grietine."
+
+mozzarella_tomato_toast:
+  name: "Skrebučiai su mocarela ir pomidorais"
+  meal_type: [snack]
+  servings: 4
+  prep_minutes: 15
+  tags: [vegetarian]
+  ingredients:
+    white_bread: 200
+    mozzarella: 250
+    tomatoes: 300
+    sunflower_oil: 15
+    garlic: 0.25
+  steps:
+    - "Batono riekeles apšlakstykite aliejumi ir paskrudinkite, patrinkite česnaku."
+    - "Uždėkite pomidorų ir mocarelos griežinėlių."
+    - "Trumpai pakepinkite orkaitėje, kol sūris išsilydys."
+
+eggs_cucumber_rye:
+  name: "Virti kiaušiniai su agurku ir rugine duona"
+  meal_type: [breakfast, snack]
+  servings: 4
+  prep_minutes: 12
+  tags: [vegetarian]
+  ingredients:
+    eggs: 8
+    cucumber: 2
+    rye_bread: 160
+    mayonnaise: 40
+  steps:
+    - "Kiaušinius virkite 9 min., atvėsinkite ir perpjaukite pusiau."
+    - "Patiekite su agurko griežinėliais, rugine duona ir majonezu."
+
+banana_oat_pancakes:
+  name: "Bananų ir avižų blyneliai"
+  meal_type: [breakfast, snack]
+  servings: 4
+  prep_minutes: 20
+  tags: [vegetarian]
+  ingredients:
+    bananas: 360
+    eggs: 3
+    oats: 120
+    sunflower_oil: 15
+    honey: 20
+  steps:
+    - "Bananus sutrinkite šakute, įmuškite kiaušinius ir įmaišykite avižinius dribsnius."
+    - "Kepkite nedidelius blynelius įkaitintame aliejuje iš abiejų pusių."
+    - "Patiekite apšlakstytus medumi."
+
+sprat_sandwiches:
+  name: "Šprotų sumuštiniai su agurku"
+  meal_type: [snack]
+  servings: 4
+  prep_minutes: 10
+  tags: []
+  ingredients:
+    rye_bread: 200
+    sprats: 240
+    cucumber: 1
+    mayonnaise: 30
+    garlic: 0.25
+  steps:
+    - "Majonezą išmaišykite su spaustu česnaku ir užtepkite ant duonos."
+    - "Uždėkite šprotų ir agurko griežinėlių."
+
+fried_garlic_bread:
+  name: "Kepta duona su česnaku ir sūriu"
+  meal_type: [snack]
+  servings: 4
+  prep_minutes: 15
+  tags: [vegetarian]
+  ingredients:
+    rye_bread: 300
+    garlic: 1
+    sunflower_oil: 60
+    cheese: 80
+    mayonnaise: 50
+  steps:
+    - "Duoną supjaustykite lazdelėmis ir apkepkite aliejuje iki traškumo."
+    - "Karštą duoną patrinkite česnaku."
+    - "Patiekite su tarkuotu sūriu ir česnakiniu majonezu."
+
+tuna_tortilla_rolls:
+  name: "Tortilijų suktinukai su tunu ir lydytu sūriu"
+  meal_type: [snack]
+  servings: 4
+  prep_minutes: 15
+  tags: []
+  ingredients:
+    tortillas: 240
+    tuna: 160
+    processed_cheese: 100
+    cucumber: 1
+  steps:
+    - "Tortilijas užtepkite lydytu sūriu."
+    - "Paskleiskite nusausintą tuną ir plonas agurko juosteles."
+    - "Susukite, atvėsinkite ir supjaustykite suktinukais."
+
+curd_doughnuts:
+  name: "Varškės spurgytės"
+  meal_type: [snack]
+  servings: 6
+  prep_minutes: 40
+  tags: [vegetarian]
+  ingredients:
+    cottage_cheese: 360
+    eggs: 2
+    flour: 220
+    sugar: 60
+    sunflower_oil: 100
+  steps:
+    - "Varškę ištrinkite su kiaušiniais ir cukrumi, įmaišykite miltus."
+    - "Šlapiomis rankomis formuokite rutuliukus."
+    - "Kepkite įkaitintame aliejuje, kol gražiai paruduos, sudėkite ant popierinio rankšluosčio."
