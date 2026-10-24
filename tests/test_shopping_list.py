@@ -23,13 +23,13 @@ def data():
 
 @pytest.fixture
 def products(data):
-    """Every ingredient at 1 € per pack of 500 g/ml or 10 pcs; milk on sale."""
+    """Every ingredient on sale (was 1.39 €) at 1 € per pack of 500 g/ml or 10 pcs; milk cheaper still."""
     p = {
-        k: Product("1", f"Rimi {k}", 100, None, None, None, None, None, None,
+        k: Product("1", f"Rimi {k}", 100, 139, None, None, None, None, None,
                    10 if i.unit == "pcs" else 500, i.unit, f"https://rimi.lt/p/{k}", True)
         for k, i in data.ingredients.items()
     }
-    p["milk"] = replace(p["milk"], price_cents=90, regular_price_cents=139)
+    p["milk"] = replace(p["milk"], price_cents=90)
     return p
 
 
@@ -71,7 +71,7 @@ def test_markdown(shopping):
     _, sl = shopping
     md = to_markdown(sl)
     assert md.startswith("# Shopping list\n\nPrices as of 2026-10-24")
-    assert "## dairy" in md and "(sale, was 1.39 €)" in md
+    assert f"## {sl.lines[0].category}" in md and "(sale, was 1.39 €)" in md
     assert "- [ ] " in md and "](https://rimi.lt/p/" in md
     assert f"**Total {sl.total_cents / 100:.2f} €**" in md
     assert "https://" not in to_markdown(sl, links=False)

@@ -27,6 +27,7 @@ VARIETY_BONUS = 30  # cents per distinct recipe used
 PANTRY_PENALTY = 1.0  # × shelf value of pantry stock left unused, in use-up-pantry mode
 MAX_DEAL_PACKS = 99
 TIME_LIMIT_S = 10
+GAP = 0.01  # stop within 1% of the best possible plan: proving the exact optimum can take the whole time limit
 KEEPS = 365  # shelf days of ingredients without perishable_days
 
 
@@ -152,7 +153,7 @@ def _solve(
         - VARIETY_BONUS * pulp.lpSum(uses.values())
     )
 
-    prob.solve(pulp.PULP_CBC_CMD(msg=False, timeLimit=TIME_LIMIT_S))
+    prob.solve(pulp.PULP_CBC_CMD(msg=False, timeLimit=TIME_LIMIT_S, gapRel=GAP))
     if prob.sol_status not in (pulp.LpSolutionOptimal, pulp.LpSolutionIntegerFeasible):
         return None
     return (

@@ -84,6 +84,7 @@ def test_all_problems_reported_together(data_dir):
 
 def test_slot_without_recipe(data_dir):
     edit(data_dir, "settings.yaml", lambda d: d.update(meal_slots=["breakfast", "snack"]))
+    edit(data_dir, "recipes.yaml", lambda d: [d.pop(k) for k in [k for k, r in d.items() if "snack" in r["meal_type"]]])
     assert "no usable recipe for meal slot 'snack'" in errors_of(data_dir)
 
 

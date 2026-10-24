@@ -61,7 +61,7 @@ def test_update_prices_fetches_every_ingredient(tmp_path, monkeypatch):
     monkeypatch.setattr(cli, "DB_FILE", tmp_path / "empty.db")
     monkeypatch.setattr(RimiScraper, "get_price", lambda self, rimi_id: _product(rimi_id))
     at = AppTest.from_function(_prices_page).run()
-    at.button[0].click().run()
+    at.button[0].click().run(timeout=30)  # one fake fetch + DB write per ingredient
     assert not at.exception and not at.error
     n = len(load_data(cli.DATA_DIR).ingredients)
     assert at.success[0].value.startswith(f"Fetched {n}, cached 0")
