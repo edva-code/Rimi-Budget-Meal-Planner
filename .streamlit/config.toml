@@ -1,0 +1,28 @@
+# Rimi.lt look: colors taken from the e-shop's own CSS (tests/fixtures/search_*.html).
+[theme]
+base = "light"
+primaryColor = "#A12971"             # Rimi plum buttons
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F2F6F7" # Rimi page grey
+textColor = "#363D40"
+linkColor = "#A12971"
+borderColor = "#E4EBED"
+showWidgetBorder = true
+baseRadius = "8px"
+buttonRadius = "8px"
+# Rimi uses its own Neris font; Nunito Sans is a free look-alike.
+font = "'Nunito Sans':https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap"
+headingFontWeights = [800, 700, 700, 600, 600, 600]
+metricValueFontWeight = 800
+linkUnderline = false
+
+redColor = "#ED1C24"                 # Rimi logo red, used for deal badges
+violetColor = "#A12971"              # Mano Rimi badges
+greenColor = "#008576"
+blueColor = "#0096D6"
+chartCategoricalColors = ["#A12971", "#ED1C24", "#0096D6", "#008576", "#871459"]
+dataframeHeaderBackgroundColor = "#F2F6F7"
+
+[theme.sidebar]
+backgroundColor = "#F2F6F7"
+secondaryBackgroundColor = "#FFFFFF"

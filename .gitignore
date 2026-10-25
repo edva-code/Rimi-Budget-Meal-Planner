@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+.pytest_cache/
+data/prices.db
+logs/
+data/*.bak
+data/*.tmp
+list.csv
+list.md
+.agents/
+.claude/
+.env

@@ -1,0 +1,1802 @@
+# Quantities are for the whole recipe (all servings), in each ingredient's unit.
+
+buckwheat_porridge:
+  name: "Grikių košė su pienu"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 20
+  tags: [vegetarian]
+  ingredients:
+    buckwheat: 150
+    milk: 400
+  steps:
+    - "Išvirkite grikius pasūdytame vandenyje."
+    - "Užpilkite šiltu pienu."
+
+buckwheat_with_eggs:
+  name: "Grikiai su kiaušiniais"
+  meal_type: [lunch, dinner]
+  servings: 2
+  prep_minutes: 25
+  tags: [vegetarian, high_protein]
+  ingredients:
+    buckwheat: 200
+    eggs: 4
+  steps:
+    - "Išvirkite grikius."
+    - "Iškepkite kiaušinius ir patiekite su grikiais."
+
+oatmeal:
+  name: "Avižinė košė su obuoliais ir bananais"
+  meal_type: [breakfast]
+  servings: 4
+  prep_minutes: 10
+  tags: [vegetarian]
+  ingredients:
+    oats: 400
+    milk: 1000
+    apples: 200
+    bananas: 200
+  steps:
+    - "Virkite dribsnius piene 5 minutes."
+    - "Įpjaustykite obuolių ir bananų."
+
+curd_pancakes:
+  name: "Varškėčiai su grietine"
+  meal_type: [breakfast]
+  servings: 4
+  prep_minutes: 30
+  tags: [vegetarian, high_protein]
+  ingredients:
+    cottage_cheese: 540
+    eggs: 2
+    flour: 120
+    sunflower_oil: 40
+    sour_cream: 200
+  steps:
+    - "Sumaišykite varškę, kiaušinius ir miltus."
+    - "Suformuokite paplotėlius ir apkepkite aliejuje."
+    - "Patiekite su grietine."
+
+omelette:
+  name: "Omletas su žirneliais ir sūrio sumuštiniais"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 15
+  tags: [vegetarian, high_protein]
+  ingredients:
+    eggs: 6
+    milk: 200
+    green_peas: 150
+    rye_bread: 250
+    margarine: 20
+    cheese: 80
+  steps:
+    - "Išplakite kiaušinius su pienu, sudėkite žirnelius ir iškepkite."
+    - "Duoną patepkite margarinu, uždėkite sūrio."
+
+yogurt_bowl:
+  name: "Jogurtas su avižiniais dribsniais ir varške"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 5
+  tags: [vegetarian, high_protein]
+  ingredients:
+    yogurt: 400
+    oats: 120
+    cottage_cheese: 180
+    bananas: 150
+  steps:
+    - "Sumaišykite jogurtą su varške, užberkite dribsnių ir bananų."
+
+chicken_rice:
+  name: "Vištiena su ryžiais ir daržovėmis"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 50
+  tags: [high_protein]
+  ingredients:
+    chicken: 1000
+    rice: 400
+    frozen_vegetables: 400
+    onions: 100
+    sunflower_oil: 30
+  steps:
+    - "Kepkite vištieną orkaitėje 200 °C 40 minučių."
+    - "Išvirkite ryžius, pakepinkite svogūnus ir daržoves."
+
+lentil_soup:
+  name: "Raudonųjų lęšių sriuba su duona"
+  meal_type: [lunch, dinner]
+  servings: 6
+  prep_minutes: 40
+  tags: [vegetarian, vegan]
+  ingredients:
+    red_lentils: 400
+    potatoes: 400
+    carrots: 200
+    onions: 100
+    canned_tomatoes: 400
+    sunflower_oil: 30
+    rye_bread: 400
+  steps:
+    - "Pakepinkite svogūnus ir morkas."
+    - "Sudėkite lęšius, bulves, pomidorus, užpilkite vandeniu ir virkite 25 minutes."
+
+pasta_bolognese:
+  name: "Makaronai su faršo ir pomidorų padažu"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 30
+  tags: [high_protein]
+  ingredients:
+    pasta: 400
+    pork_mince: 350
+    canned_tomatoes: 400
+    onions: 100
+    carrots: 100
+    cheese: 50
+  steps:
+    - "Apkepkite faršą su svogūnais ir morkomis, sudėkite pomidorus, troškinkite 15 minučių."
+    - "Išvirkite makaronus, patiekite su padažu ir tarkuotu sūriu."
+
+stewed_cabbage:
+  name: "Troškinti kopūstai su faršu ir bulvėmis"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 50
+  tags: []
+  ingredients:
+    cabbage: 1000
+    pork_mince: 350
+    carrots: 200
+    onions: 100
+    potatoes: 800
+    sunflower_oil: 30
+  steps:
+    - "Apkepkite faršą su svogūnais, sudėkite kopūstus ir morkas, troškinkite 30 minučių."
+    - "Išvirkite bulves ir patiekite kartu."
+
+cold_beet_soup:
+  name: "Šaltibarščiai su karštomis bulvėmis"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 40
+  tags: [vegetarian]
+  ingredients:
+    kefir: 1800
+    beets: 500
+    cucumber: 1
+    eggs: 4
+    potatoes: 800
+    red_beans: 240
+  steps:
+    - "Išvirkite burokėlius, kiaušinius ir bulves."
+    - "Burokėlius ir agurką sutarkuokite, sumaišykite su kefyru."
+    - "Patiekite su kiaušiniais, pupelėmis ir karštomis bulvėmis."
+
+semolina_porridge:
+  name: "Manų košė su uogiene"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 10
+  tags: [vegetarian]
+  ingredients:
+    semolina: 100
+    milk: 600
+    butter: 10
+    jam: 60
+  steps:
+    - "Užvirinkite pieną ir plona srovele, nuolat maišydami, suberkite manų kruopas."
+    - "Virkite 3–4 min., kol sutirštės, įdėkite sviesto."
+    - "Patiekite su uogiene."
+
+millet_porridge:
+  name: "Sorų košė su obuoliais ir medumi"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 25
+  tags: [vegetarian]
+  ingredients:
+    millet: 150
+    milk: 500
+    apples: 200
+    honey: 30
+  steps:
+    - "Sorų kruopas nuplaukite karštu vandeniu."
+    - "Virkite piene ant silpnos ugnies apie 20 min."
+    - "Įmaišykite tarkuotą obuolį ir pagardinkite medumi."
+
+rice_porridge:
+  name: "Ryžių košė su razinomis"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 30
+  tags: [vegetarian]
+  ingredients:
+    rice: 150
+    milk: 700
+    raisins: 50
+    sugar: 20
+    butter: 10
+  steps:
+    - "Ryžius virkite piene ant silpnos ugnies, dažnai maišydami, apie 25 min."
+    - "Paskutines 5 min. įberkite razinų ir cukraus."
+    - "Patiekite su sviestu."
+
+blueberry_oatmeal:
+  name: "Avižinė košė su šilauogėmis"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 10
+  tags: [vegetarian]
+  ingredients:
+    oats: 160
+    milk: 500
+    blueberries: 150
+    honey: 20
+  steps:
+    - "Avižas virkite piene 5 min."
+    - "Įmaišykite šilauoges ir pagardinkite medumi."
+
+peanut_banana_oatmeal:
+  name: "Avižinė košė su žemės riešutų kremu ir bananu"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 10
+  tags: [vegetarian]
+  ingredients:
+    oats: 160
+    milk: 500
+    peanut_cream: 40
+    bananas: 240
+  steps:
+    - "Avižas virkite piene 5 min."
+    - "Įmaišykite žemės riešutų kremą, ant viršaus sudėkite banano griežinėlius."
+
+eggs_with_tomatoes:
+  name: "Kiaušinienė su pomidorais ir ruginė duona"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 10
+  tags: [vegetarian]
+  ingredients:
+    eggs: 5
+    tomatoes: 250
+    butter: 10
+    rye_bread: 120
+  steps:
+    - "Keptuvėje ant sviesto pakepinkite pomidorų skilteles."
+    - "Įmuškite kiaušinius, pasūdykite ir kepkite, kol sustings."
+    - "Patiekite su rugine duona."
+
+eggs_with_bacon:
+  name: "Kiaušinienė su šonine"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 15
+  tags: [high_protein]
+  ingredients:
+    eggs: 4
+    bacon: 100
+    rye_bread: 120
+  steps:
+    - "Šoninę supjaustykite juostelėmis ir apkepkite, kol taps traški."
+    - "Įmuškite kiaušinius ir kepkite iki norimo lygio."
+    - "Patiekite su rugine duona."
+
+shakshuka:
+  name: "Šakšuka"
+  meal_type: [breakfast, lunch]
+  servings: 2
+  prep_minutes: 25
+  tags: [vegetarian]
+  ingredients:
+    eggs: 4
+    tomato_sauce: 300
+    bell_pepper: 200
+    onions: 100
+    garlic: 0.25
+    sunflower_oil: 15
+    white_bread: 120
+  steps:
+    - "Aliejuje pakepinkite smulkintą svogūną, česnaką ir paprikos juosteles."
+    - "Supilkite pomidorų padažą ir troškinkite 10 min."
+    - "Padaže padarykite duobutes, įmuškite kiaušinius, uždenkite ir kaitinkite, kol baltymai sustings."
+    - "Patiekite su batonu."
+
+french_toast:
+  name: "Prancūziški skrebučiai su uogiene"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 15
+  tags: [vegetarian]
+  ingredients:
+    white_bread: 200
+    eggs: 3
+    milk: 150
+    butter: 20
+    jam: 60
+  steps:
+    - "Išplakite kiaušinius su pienu."
+    - "Batono riekes pamirkykite plakinyje ir kepkite ant sviesto iš abiejų pusių."
+    - "Patiekite su uogiene."
+
+pancakes_with_jam:
+  name: "Blynai su uogiene"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 30
+  tags: [vegetarian]
+  ingredients:
+    flour: 200
+    milk: 400
+    eggs: 2
+    sugar: 20
+    sunflower_oil: 20
+    jam: 100
+  steps:
+    - "Išplakite kiaušinius su cukrumi ir pienu, įmaišykite miltus iki vientisos tešlos."
+    - "Kepkite plonus blynus įkaitintoje, aliejumi pateptoje keptuvėje."
+    - "Patiekite su uogiene."
+
+crepes_with_curd:
+  name: "Lietiniai su varške"
+  meal_type: [breakfast, lunch]
+  servings: 3
+  prep_minutes: 40
+  tags: [vegetarian, high_protein]
+  ingredients:
+    flour: 150
+    milk: 350
+    eggs: 3
+    cottage_cheese: 360
+    sugar: 30
+    sour_cream: 100
+    sunflower_oil: 20
+  steps:
+    - "Iš miltų, pieno ir 2 kiaušinių išmaišykite tešlą ir iškepkite plonus blynus."
+    - "Varškę sutrinkite su likusiu kiaušiniu ir cukrumi."
+    - "Į kiekvieną blyną įdėkite varškės, susukite vokeliu ir apkepkite."
+    - "Patiekite su grietine."
+
+apple_pancakes:
+  name: "Obuoliniai blynai su kefyru"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 30
+  tags: [vegetarian]
+  ingredients:
+    flour: 150
+    kefir: 300
+    eggs: 2
+    apples: 300
+    sugar: 20
+    sunflower_oil: 30
+  steps:
+    - "Kefyrą išmaišykite su kiaušiniais, cukrumi ir miltais."
+    - "Įmaišykite stambiai tarkuotus obuolius."
+    - "Kepkite nedidelius blynelius aliejuje iš abiejų pusių."
+
+curd_with_honey:
+  name: "Varškė su grietine, medumi ir bananu"
+  meal_type: [breakfast, snack]
+  servings: 2
+  prep_minutes: 5
+  tags: [vegetarian, high_protein]
+  ingredients:
+    cottage_cheese: 360
+    sour_cream: 100
+    honey: 30
+    bananas: 120
+  steps:
+    - "Varškę išmaišykite su grietine."
+    - "Sudėkite banano griežinėlius ir užpilkite medumi."
+
+curd_casserole:
+  name: "Varškės apkepas su razinomis"
+  meal_type: [breakfast, snack]
+  servings: 4
+  prep_minutes: 50
+  tags: [vegetarian, high_protein]
+  ingredients:
+    cottage_cheese: 540
+    eggs: 3
+    semolina: 60
+    sugar: 50
+    raisins: 60
+    butter: 10
+    sour_cream: 100
+  steps:
+    - "Varškę sutrinkite su kiaušiniais, cukrumi ir manų kruopomis, įmaišykite razinas."
+    - "Supilkite į sviestu pateptą formą."
+    - "Kepkite 180 °C orkaitėje apie 35 min."
+    - "Patiekite su grietine."
+
+cheese_sandwiches:
+  name: "Ruginės duonos sumuštiniai su sūriu ir agurku"
+  meal_type: [breakfast, snack]
+  servings: 2
+  prep_minutes: 5
+  tags: [vegetarian]
+  ingredients:
+    rye_bread: 200
+    butter: 20
+    cheese: 100
+    cucumber: 1
+  steps:
+    - "Duoną aptepkite sviestu."
+    - "Uždėkite sūrio ir agurko griežinėlių."
+
+tuna_sandwiches:
+  name: "Sumuštiniai su tunu"
+  meal_type: [breakfast, snack]
+  servings: 2
+  prep_minutes: 10
+  tags: [high_protein]
+  ingredients:
+    white_bread: 200
+    tuna: 185
+    mayonnaise: 30
+    cucumber: 0.5
+  steps:
+    - "Nusunktą tuną sumaišykite su majonezu."
+    - "Užtepkite ant batono riekių ir uždėkite agurko griežinėlių."
+
+herring_on_rye:
+  name: "Ruginė duona su silke ir svogūnais"
+  meal_type: [breakfast, snack]
+  servings: 2
+  prep_minutes: 10
+  tags: [high_protein]
+  ingredients:
+    rye_bread: 200
+    butter: 20
+    herring: 150
+    onions: 50
+  steps:
+    - "Duoną aptepkite sviestu."
+    - "Uždėkite silkės gabalėlių ir plonų svogūno žiedų."
+
+egg_salad_toast:
+  name: "Kiaušinių salotos ant ruginės duonos"
+  meal_type: [breakfast, snack]
+  servings: 2
+  prep_minutes: 15
+  tags: [vegetarian]
+  ingredients:
+    eggs: 4
+    mayonnaise: 40
+    onions: 30
+    rye_bread: 200
+  steps:
+    - "Kiaušinius virkite 10 min., atvėsinkite ir susmulkinkite."
+    - "Sumaišykite su smulkintu svogūnu ir majonezu."
+    - "Užtepkite ant duonos riekių."
+
+berry_smoothie:
+  name: "Kefyro kokteilis su bananais ir šilauogėmis"
+  meal_type: [breakfast, snack]
+  servings: 2
+  prep_minutes: 5
+  tags: [vegetarian]
+  ingredients:
+    kefir: 500
+    bananas: 240
+    blueberries: 150
+    honey: 20
+  steps:
+    - "Visus produktus sutrinkite trintuvu iki vientisos masės."
+
+sausages_and_eggs:
+  name: "Dešrelės su kiaušiniene ir pomidorais"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 15
+  tags: [high_protein]
+  ingredients:
+    sausages: 200
+    eggs: 3
+    tomatoes: 200
+  steps:
+    - "Dešreles supjaustykite ir apkepkite keptuvėje."
+    - "Įmuškite kiaušinius ir kepkite, kol sustings."
+    - "Patiekite su pomidorų skiltelėmis."
+
+mushroom_omelette:
+  name: "Omletas su pievagrybiais ir sūriu"
+  meal_type: [breakfast, dinner]
+  servings: 2
+  prep_minutes: 15
+  tags: [vegetarian, high_protein]
+  ingredients:
+    eggs: 5
+    milk: 100
+    mushrooms: 200
+    cheese: 60
+    butter: 10
+  steps:
+    - "Pievagrybius supjaustykite ir apkepkite ant sviesto."
+    - "Kiaušinius išplakite su pienu, užpilkite ant grybų."
+    - "Užberkite tarkuoto sūrio ir kepkite uždengę, kol sustings."
+
+spinach_feta_omelette:
+  name: "Omletas su špinatais ir feta"
+  meal_type: [breakfast, dinner]
+  servings: 2
+  prep_minutes: 15
+  tags: [vegetarian, high_protein]
+  ingredients:
+    eggs: 5
+    milk: 100
+    spinach: 100
+    feta: 75
+    butter: 10
+  steps:
+    - "Ant sviesto trumpai pakepinkite špinatus, kol suglebs."
+    - "Užpilkite su pienu išplaktais kiaušiniais."
+    - "Užtrupinkite fetos ir kepkite uždengę, kol sustings."
+
+beans_on_toast:
+  name: "Pupelės pomidorų padaže su skrebučiais ir kiaušiniu"
+  meal_type: [breakfast, lunch]
+  servings: 2
+  prep_minutes: 10
+  tags: [vegetarian]
+  ingredients:
+    baked_beans: 415
+    eggs: 2
+    white_bread: 160
+  steps:
+    - "Pupeles pašildykite puode."
+    - "Batono riekes paskrudinkite, iškepkite kiaušinius."
+    - "Ant skrebučių sudėkite pupeles ir kiaušinį."
+
+hot_cheese_sandwiches:
+  name: "Karšti sumuštiniai su lydytu sūriu ir pomidorais"
+  meal_type: [breakfast, snack]
+  servings: 2
+  prep_minutes: 15
+  tags: [vegetarian]
+  ingredients:
+    white_bread: 200
+    processed_cheese: 100
+    tomatoes: 200
+  steps:
+    - "Batono riekes aptepkite lydytu sūriu."
+    - "Uždėkite pomidorų griežinėlių."
+    - "Kepkite 200 °C orkaitėje 8–10 min."
+
+sweet_couscous:
+  name: "Saldus kuskusas su kriaušėmis ir razinomis"
+  meal_type: [breakfast]
+  servings: 2
+  prep_minutes: 10
+  tags: [vegetarian]
+  ingredients:
+    couscous: 150
+    milk: 400
+    pears: 300
+    raisins: 40
+    honey: 20
+  steps:
+    - "Kuskusą užpilkite karštu pienu ir palikite uždengtą 5 min."
+    - "Išpurenkite šakute, įmaišykite razinas ir kriaušių kubelius."
+    - "Pagardinkite medumi."
+
+liver_pate_toast:
+  name: "Vištienos kepenėlių paštetas ant ruginės duonos"
+  meal_type: [breakfast, snack]
+  servings: 4
+  prep_minutes: 30
+  tags: [high_protein]
+  ingredients:
+    chicken_liver: 400
+    onions: 100
+    carrots: 100
+    butter: 60
+    rye_bread: 400
+  steps:
+    - "Ant dalies sviesto pakepinkite svogūną ir tarkuotą morką."
+    - "Sudėkite kepenėles ir kepkite 10 min., kol iškeps."
+    - "Sutrinkite trintuvu su likusiu sviestu, pasūdykite."
+    - "Atvėsinkite ir tepkite ant duonos."
+
+borscht:
+  name: "Barščiai su jautiena ir duona"
+  meal_type: [lunch, dinner]
+  servings: 6
+  prep_minutes: 60
+  tags: []
+  ingredients:
+    beef_pork_mince: 400
+    beets: 500
+    cabbage: 300
+    potatoes: 400
+    carrots: 150
+    onions: 100
+    canned_tomatoes: 400
+    sour_cream: 150
+    rye_bread: 400
+  steps:
+    - "Iš faršo suformuokite kukulaičius ir virkite juos 2 l vandens 10 min."
+    - "Sudėkite bulves, tarkuotus burokėlius ir morkas, smulkintą kopūstą bei svogūną."
+    - "Supilkite pomidorus ir virkite 25 min., kol daržovės suminkštės."
+    - "Patiekite su grietine ir juoda duona."
+
+sauerkraut_soup:
+  name: "Raugintų kopūstų sriuba su šonine"
+  meal_type: [lunch, dinner]
+  servings: 6
+  prep_minutes: 70
+  tags: []
+  ingredients:
+    sauerkraut: 600
+    bacon: 200
+    potatoes: 500
+    carrots: 150
+    onions: 150
+    sunflower_oil: 20
+    rye_bread: 400
+  steps:
+    - "Pakepinkite šoninę su svogūnais ir tarkuota morka."
+    - "Sudėkite raugintus kopūstus, užpilkite 2 l vandens ir virkite 40 min."
+    - "Įdėkite pjaustytas bulves ir virkite dar 20 min."
+    - "Patiekite su juoda duona."
+
+chicken_noodle_soup:
+  name: "Vištienos sultinys su makaronais"
+  meal_type: [lunch, dinner]
+  servings: 6
+  prep_minutes: 60
+  tags: [high_protein]
+  ingredients:
+    chicken: 1000
+    pasta: 200
+    potatoes: 300
+    carrots: 200
+    onions: 100
+    white_bread: 300
+  steps:
+    - "Vištieną užpilkite 2,5 l vandens ir virkite 40 min., nugriebdami putas."
+    - "Išimkite mėsą, atskirkite nuo kaulų ir grąžinkite į puodą."
+    - "Sudėkite bulves, morkas, svogūną ir makaronus, virkite 15 min."
+    - "Patiekite su balta duona."
+
+pea_soup:
+  name: "Žirnių sriuba su dešrelėmis"
+  meal_type: [lunch, dinner]
+  servings: 6
+  prep_minutes: 40
+  tags: []
+  ingredients:
+    green_peas: 690
+    sausages: 300
+    potatoes: 500
+    carrots: 150
+    onions: 100
+    sunflower_oil: 20
+    rye_bread: 400
+  steps:
+    - "Pakepinkite svogūnus ir morkas aliejuje."
+    - "Sudėkite bulves, užpilkite 2 l vandens ir virkite 15 min."
+    - "Suberkite žirnelius ir pjaustytas dešreles, virkite dar 10 min."
+    - "Dalį sriubos sutrinkite, kad būtų tirštesnė, ir patiekite su duona."
+
+mushroom_barley_soup:
+  name: "Pievagrybių sriuba su perlinėmis kruopomis"
+  meal_type: [lunch, dinner]
+  servings: 6
+  prep_minutes: 60
+  tags: [vegetarian]
+  ingredients:
+    mushrooms: 500
+    pearl_barley: 200
+    potatoes: 400
+    carrots: 150
+    onions: 150
+    butter: 30
+    sour_cream: 150
+    rye_bread: 400
+  steps:
+    - "Perlines kruopas nuplaukite ir virkite 2 l vandens 30 min."
+    - "Svieste pakepinkite svogūnus, morkas ir pjaustytus pievagrybius."
+    - "Sudėkite daržoves ir bulves į puodą, virkite dar 20 min."
+    - "Patiekite su grietine ir duona."
+
+potato_soup:
+  name: "Bulvienė su šonine"
+  meal_type: [lunch, dinner]
+  servings: 6
+  prep_minutes: 40
+  tags: []
+  ingredients:
+    potatoes: 1000
+    bacon: 150
+    carrots: 150
+    onions: 150
+    milk: 500
+    rye_bread: 400
+  steps:
+    - "Pakepinkite šoninę su svogūnais."
+    - "Sudėkite bulves ir morkas, užpilkite 1,5 l vandens, virkite 20 min."
+    - "Supilkite pieną, pakaitinkite neužvirindami ir dalį bulvių sutrinkite."
+    - "Patiekite su juoda duona."
+
+vegetable_soup:
+  name: "Daržovių sriuba su žirneliais"
+  meal_type: [lunch, dinner]
+  servings: 6
+  prep_minutes: 35
+  tags: [vegetarian, vegan]
+  ingredients:
+    frozen_vegetables: 400
+    frozen_peas: 200
+    potatoes: 500
+    onions: 100
+    sunflower_oil: 20
+    canned_tomatoes: 400
+    rye_bread: 400
+  steps:
+    - "Pakepinkite svogūną aliejuje."
+    - "Sudėkite bulves, pomidorus, užpilkite 2 l vandens ir virkite 15 min."
+    - "Suberkite šaldytas daržoves ir žirnelius, virkite dar 10 min."
+    - "Patiekite su juoda duona."
+
+cauliflower_cream_soup:
+  name: "Trinta žiedinių kopūstų sriuba"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 35
+  tags: [vegetarian]
+  ingredients:
+    cauliflower: 1
+    potatoes: 300
+    onions: 100
+    butter: 30
+    cream: 200
+    cheese: 80
+    white_bread: 300
+  steps:
+    - "Svieste pakepinkite svogūną, sudėkite kopūsto žiedynus ir bulves."
+    - "Užpilkite 1,2 l vandens ir virkite 20 min."
+    - "Supilkite grietinėlę ir sutrinkite trintuvu."
+    - "Patiekite pabarstę tarkuotu sūriu, su skrudinta duona."
+
+broccoli_cheese_soup:
+  name: "Brokolių ir lydyto sūrio sriuba"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 30
+  tags: [vegetarian]
+  ingredients:
+    broccoli: 400
+    potatoes: 300
+    onions: 100
+    processed_cheese: 175
+    butter: 20
+    white_bread: 300
+  steps:
+    - "Svieste pakepinkite svogūną, sudėkite bulves ir užpilkite 1,2 l vandens."
+    - "Virkite 10 min., suberkite brokolius ir virkite dar 10 min."
+    - "Įmaišykite lydytą sūrelį ir sutrinkite."
+    - "Patiekite su duona."
+
+fish_soup:
+  name: "Menkės žuvienė"
+  meal_type: [lunch, dinner]
+  servings: 5
+  prep_minutes: 40
+  tags: [high_protein]
+  ingredients:
+    cod_fillet: 500
+    potatoes: 500
+    carrots: 150
+    onions: 100
+    butter: 20
+    lemons: 50
+    rye_bread: 300
+  steps:
+    - "Bulves, morkas ir svogūną virkite 1,5 l vandens 15 min."
+    - "Sudėkite menkės gabalėlius ir virkite 8 min. ant silpnos ugnies."
+    - "Įdėkite sviesto, pagardinkite citrinos sultimis."
+    - "Patiekite su juoda duona."
+
+bean_tomato_soup:
+  name: "Pupelių ir pomidorų sriuba"
+  meal_type: [lunch, dinner]
+  servings: 6
+  prep_minutes: 35
+  tags: [vegetarian, vegan]
+  ingredients:
+    red_beans: 400
+    white_beans: 400
+    canned_tomatoes: 800
+    onions: 150
+    carrots: 150
+    garlic: 0.25
+    sunflower_oil: 30
+    rye_bread: 400
+  steps:
+    - "Pakepinkite svogūnus, morkas ir česnaką aliejuje."
+    - "Supilkite pomidorus ir 1 l vandens, virkite 10 min."
+    - "Sudėkite nusunktas pupeles ir virkite dar 10 min."
+    - "Patiekite su duona."
+
+meatball_soup:
+  name: "Kukulaičių sriuba"
+  meal_type: [lunch, dinner]
+  servings: 6
+  prep_minutes: 45
+  tags: [high_protein]
+  ingredients:
+    beef_pork_mince: 500
+    eggs: 1
+    rice: 100
+    potatoes: 500
+    carrots: 150
+    onions: 100
+    white_bread: 300
+  steps:
+    - "Faršą išmaišykite su kiaušiniu ir pusė smulkinto svogūno, suformuokite kukulaičius."
+    - "Bulves, morkas, likusį svogūną ir ryžius virkite 2 l vandens 10 min."
+    - "Sudėkite kukulaičius ir virkite dar 15 min."
+    - "Patiekite su duona."
+
+chickpea_curry_soup:
+  name: "Avinžirnių ir špinatų sriuba"
+  meal_type: [lunch, dinner]
+  servings: 5
+  prep_minutes: 30
+  tags: [vegetarian, vegan]
+  ingredients:
+    chickpeas: 800
+    canned_tomatoes: 400
+    spinach: 200
+    onions: 150
+    garlic: 0.25
+    sunflower_oil: 30
+    rice: 200
+  steps:
+    - "Išvirkite ryžius."
+    - "Pakepinkite svogūną ir česnaką, supilkite pomidorus ir 1 l vandens."
+    - "Sudėkite avinžirnius, virkite 10 min., įmaišykite špinatus."
+    - "Patiekite su ryžiais."
+
+zucchini_soup:
+  name: "Trinta cukinijų sriuba su sūriu"
+  meal_type: [lunch]
+  servings: 4
+  prep_minutes: 30
+  tags: [vegetarian]
+  ingredients:
+    zucchini: 2
+    potatoes: 300
+    onions: 100
+    butter: 20
+    cream: 200
+    feta: 150
+    white_bread: 300
+  steps:
+    - "Svieste pakepinkite svogūną, sudėkite pjaustytas cukinijas ir bulves."
+    - "Užpilkite 1 l vandens, virkite 15 min."
+    - "Supilkite grietinėlę ir sutrinkite."
+    - "Patiekite su sutrupintu fetos sūriu ir duona."
+
+dumplings_in_broth:
+  name: "Koldūnai sultinyje su grietine"
+  meal_type: [lunch, dinner]
+  servings: 3
+  prep_minutes: 20
+  tags: []
+  ingredients:
+    dumplings: 600
+    carrots: 100
+    onions: 50
+    sour_cream: 150
+  steps:
+    - "Morkas ir svogūną virkite 1,5 l pasūdyto vandens 10 min."
+    - "Sudėkite koldūnus ir virkite, kol iškils, dar 5 min."
+    - "Patiekite su grietine."
+
+fried_dumplings:
+  name: "Keptų koldūnų lėkštė su grietine"
+  meal_type: [lunch, dinner]
+  servings: 3
+  prep_minutes: 20
+  tags: []
+  ingredients:
+    dumplings: 600
+    onions: 100
+    butter: 30
+    sour_cream: 150
+    cucumber: 1
+  steps:
+    - "Koldūnus išvirkite pasūdytame vandenyje."
+    - "Svieste pakepinkite svogūną, sudėkite koldūnus ir apkepkite."
+    - "Patiekite su grietine ir agurku."
+
+chicken_tortilla_wraps:
+  name: "Vištienos tortilijos su daržovėmis"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 25
+  tags: [high_protein]
+  ingredients:
+    chicken_fillet: 500
+    tortillas: 320
+    bell_pepper: 200
+    tomatoes: 200
+    cucumber: 1
+    yogurt: 150
+    sunflower_oil: 20
+  steps:
+    - "Vištienos filė supjaustykite juostelėmis ir apkepkite aliejuje su paprika."
+    - "Pomidorus ir agurką supjaustykite."
+    - "Tortilijas patepkite jogurtu, sudėkite vištieną ir daržoves, susukite."
+
+tuna_pasta_salad:
+  name: "Makaronų salotos su tunu"
+  meal_type: [lunch]
+  servings: 4
+  prep_minutes: 20
+  tags: [high_protein]
+  ingredients:
+    pasta: 300
+    tuna: 320
+    corn: 340
+    cucumber: 1
+    eggs: 3
+    mayonnaise: 120
+  steps:
+    - "Išvirkite makaronus ir kiaušinius, atvėsinkite."
+    - "Supjaustykite agurką ir kiaušinius."
+    - "Sumaišykite su tunu, kukurūzais ir majonezu."
+
+potato_salad:
+  name: "Bulvių mišrainė su dešrele"
+  meal_type: [lunch, dinner]
+  servings: 5
+  prep_minutes: 40
+  tags: []
+  ingredients:
+    potatoes: 800
+    carrots: 200
+    eggs: 4
+    sausages: 300
+    green_peas: 450
+    pickles: 200
+    mayonnaise: 200
+  steps:
+    - "Išvirkite bulves, morkas ir kiaušinius su lupenomis, atvėsinkite."
+    - "Viską supjaustykite kubeliais kartu su dešrelėmis ir agurkais."
+    - "Sudėkite žirnelius, išmaišykite su majonezu."
+
+bulgur_salad:
+  name: "Bulguro salotos su avinžirniais ir feta"
+  meal_type: [lunch]
+  servings: 4
+  prep_minutes: 25
+  tags: [vegetarian]
+  ingredients:
+    bulgur: 250
+    chickpeas: 400
+    tomatoes: 300
+    cucumber: 1
+    feta: 150
+    lemons: 100
+    sunflower_oil: 40
+  steps:
+    - "Bulgurą užpilkite verdančiu vandeniu ir palikite 15 min."
+    - "Supjaustykite pomidorus ir agurką."
+    - "Sumaišykite su avinžirniais, sutrupinta feta, citrinos sultimis ir aliejumi."
+
+rice_bean_bowl:
+  name: "Ryžiai su pupelėmis ir kukurūzais"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 30
+  tags: [vegetarian, vegan]
+  ingredients:
+    rice: 300
+    red_beans: 400
+    corn: 340
+    bell_pepper: 200
+    onions: 100
+    tomato_sauce: 300
+    sunflower_oil: 20
+  steps:
+    - "Išvirkite ryžius."
+    - "Pakepinkite svogūną ir papriką, sudėkite pupeles, kukurūzus ir pomidorų padažą."
+    - "Troškinkite 10 min. ir patiekite su ryžiais."
+
+baked_potatoes_curd:
+  name: "Keptos bulvės su varške ir krapais"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 50
+  tags: [vegetarian, high_protein]
+  ingredients:
+    potatoes: 1200
+    cottage_cheese: 360
+    sour_cream: 150
+    garlic: 0.25
+    sunflower_oil: 30
+    cucumber: 1
+  steps:
+    - "Bulves perpjaukite pusiau, aptepkite aliejumi ir kepkite 200 °C orkaitėje 40 min."
+    - "Varškę sumaišykite su grietine ir tarkuotu česnaku."
+    - "Patiekite bulves su varškės padažu ir agurku."
+
+kugelis:
+  name: "Kugelis su spirgučiais"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 90
+  tags: []
+  ingredients:
+    potatoes: 1500
+    bacon: 200
+    onions: 150
+    eggs: 2
+    milk: 150
+    sour_cream: 200
+  steps:
+    - "Spirgučius ir svogūną pakepinkite keptuvėje."
+    - "Bulves smulkiai sutarkuokite, nuspauskite skystį, įmuškite kiaušinius, supilkite karštą pieną ir spirgučius."
+    - "Supilkite į riebalais pateptą formą ir kepkite 180 °C orkaitėje apie 1 val."
+    - "Patiekite su grietine."
+
+baked_drumsticks_potatoes:
+  name: "Orkaitėje keptos vištų blauzdelės su bulvėmis"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 60
+  tags: [high_protein]
+  ingredients:
+    chicken_drumsticks: 1000
+    potatoes: 1000
+    carrots: 200
+    onions: 100
+    garlic: 0.25
+    sunflower_oil: 30
+  steps:
+    - "Bulves ir morkas supjaustykite skiltelėmis, svogūną žiedais."
+    - "Viską sudėkite į kepimo indą su blauzdelėmis, apšlakstykite aliejumi, įberkite česnako."
+    - "Kepkite 200 °C orkaitėje apie 50 min., kol mėsa apskrus."
+
+pork_stew_buckwheat:
+  name: "Kiaulienos troškinys su grikiais"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 75
+  tags: [high_protein]
+  ingredients:
+    pork_shoulder: 600
+    buckwheat: 300
+    onions: 150
+    carrots: 150
+    sour_cream: 100
+    sunflower_oil: 20
+  steps:
+    - "Kiaulieną supjaustykite gabaliukais ir apkepkite aliejuje."
+    - "Sudėkite svogūną ir morkas, užpilkite vandeniu ir troškinkite 1 val."
+    - "Pabaigoje įmaišykite grietinę. Patiekite su išvirtais grikiais."
+
+meat_patties_mash:
+  name: "Kotletai su bulvių koše"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 45
+  tags: [high_protein]
+  ingredients:
+    beef_pork_mince: 600
+    eggs: 1
+    white_bread: 60
+    onions: 100
+    potatoes: 1000
+    milk: 150
+    butter: 30
+    sunflower_oil: 30
+    cucumber: 1
+  steps:
+    - "Batoną išmirkykite piene, sumaišykite su faršu, kiaušiniu ir tarkuotu svogūnu."
+    - "Suformuokite kotletus ir kepkite aliejuje po 5 min. iš abiejų pusių."
+    - "Bulves išvirkite ir sutrinkite su likusiu pienu ir sviestu."
+    - "Patiekite su agurku."
+
+chicken_broccoli_stirfry:
+  name: "Vištiena su brokoliais ir ryžiais"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 30
+  tags: [high_protein]
+  ingredients:
+    chicken_fillet: 600
+    broccoli: 400
+    carrots: 100
+    rice: 300
+    soy_sauce: 40
+    garlic: 0.25
+    sunflower_oil: 20
+  steps:
+    - "Išvirkite ryžius."
+    - "Vištieną supjaustykite juostelėmis ir greitai apkepkite karštame aliejuje."
+    - "Sudėkite brokolius, morkas ir česnaką, kepkite 5 min."
+    - "Užpilkite sojos padažu ir patiekite su ryžiais."
+
+spaghetti_carbonara:
+  name: "Spagečiai carbonara"
+  meal_type: [dinner]
+  servings: 4
+  prep_minutes: 25
+  tags: []
+  ingredients:
+    spaghetti: 400
+    bacon: 200
+    eggs: 3
+    cheese: 100
+    garlic: 0.25
+  steps:
+    - "Išvirkite spagečius, pasilikite puodelį virimo vandens."
+    - "Šoninę apkepkite su česnaku."
+    - "Kiaušinius išplakite su tarkuotu sūriu."
+    - "Nukėlę nuo ugnies sumaišykite spagečius su šonine ir kiaušinių mase, praskieskite virimo vandeniu."
+
+turkey_meatballs_spaghetti:
+  name: "Kalakutienos kukuliai pomidorų padaže su spagečiais"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 40
+  tags: [high_protein]
+  ingredients:
+    turkey_mince: 500
+    eggs: 1
+    onions: 100
+    spaghetti: 350
+    tomato_sauce: 500
+    cheese: 50
+  steps:
+    - "Faršą sumaišykite su kiaušiniu ir tarkuotu svogūnu, suformuokite kukulius."
+    - "Kukulius troškinkite pomidorų padaže 20 min."
+    - "Išvirkite spagečius ir patiekite su kukuliais, pabarstę sūriu."
+
+liver_with_buckwheat:
+  name: "Vištų kepenėlės grietinėje su grikiais"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 30
+  tags: [high_protein]
+  ingredients:
+    chicken_liver: 500
+    onions: 200
+    sour_cream: 200
+    buckwheat: 300
+    sunflower_oil: 20
+  steps:
+    - "Išvirkite grikius."
+    - "Svogūnus pakepinkite, sudėkite kepenėles ir kepkite 5 min."
+    - "Įmaišykite grietinę ir patroškinkite dar 5 min. Patiekite su grikiais."
+
+baked_cod_potatoes:
+  name: "Orkaitėje kepta menkė su bulvėmis"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 45
+  tags: [high_protein]
+  ingredients:
+    cod_fillet: 600
+    potatoes: 1000
+    carrots: 150
+    lemons: 60
+    sour_cream: 100
+    sunflower_oil: 30
+  steps:
+    - "Bulves ir morkas supjaustykite, apšlakstykite aliejumi ir kepkite 200 °C 20 min."
+    - "Sudėkite menkę, apšlakstykite citrinos sultimis, aptepkite grietine."
+    - "Kepkite dar 20 min."
+
+cod_rice_peas:
+  name: "Menkė su ryžiais ir žirneliais"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 30
+  tags: [high_protein]
+  ingredients:
+    cod_fillet: 600
+    rice: 300
+    frozen_peas: 300
+    butter: 30
+    lemons: 60
+    flour: 30
+  steps:
+    - "Išvirkite ryžius, paskutines 5 min. kartu virkite žirnelius."
+    - "Menkę apvoliokite miltuose ir kepkite svieste po 4 min. iš abiejų pusių."
+    - "Patiekite su ryžiais, žirneliais ir citrina."
+
+stuffed_peppers:
+  name: "Įdarytos paprikos"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 60
+  tags: [high_protein]
+  ingredients:
+    bell_pepper: 800
+    beef_pork_mince: 500
+    rice: 150
+    onions: 100
+    tomato_sauce: 400
+    sour_cream: 100
+  steps:
+    - "Ryžius pusiau išvirkite ir sumaišykite su faršu ir smulkintu svogūnu."
+    - "Paprikas išskobkite ir prikimškite įdaro."
+    - "Sustatykite į puodą, užpilkite pomidorų padažu ir troškinkite 40 min."
+    - "Patiekite su grietine."
+
+cabbage_rolls:
+  name: "Balandėliai"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 90
+  tags: [high_protein]
+  ingredients:
+    cabbage: 1200
+    beef_pork_mince: 500
+    rice: 150
+    onions: 100
+    carrots: 100
+    tomato_sauce: 300
+    sour_cream: 150
+  steps:
+    - "Kopūsto lapus nuplikykite verdančiame vandenyje, kad suminkštėtų."
+    - "Faršą sumaišykite su pusiau išvirtais ryžiais ir smulkintu svogūnu."
+    - "Įdarą suvyniokite į lapus, sudėkite į puodą su tarkuotomis morkomis."
+    - "Užpilkite pomidorų padažu su vandeniu ir troškinkite 1 val. Patiekite su grietine."
+
+zucchini_pancakes:
+  name: "Cukinijų blynai su grietine"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 35
+  tags: [vegetarian]
+  ingredients:
+    zucchini: 3
+    eggs: 3
+    flour: 150
+    cheese: 100
+    garlic: 0.25
+    sunflower_oil: 50
+    sour_cream: 200
+  steps:
+    - "Cukinijas sutarkuokite ir nuspauskite skystį."
+    - "Sumaišykite su kiaušiniais, miltais, tarkuotu sūriu ir česnaku."
+    - "Kepkite blynelius aliejuje po 3 min. iš abiejų pusių. Patiekite su grietine."
+
+potato_pancakes:
+  name: "Bulviniai blynai su grietine"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 45
+  tags: [vegetarian]
+  ingredients:
+    potatoes: 1500
+    eggs: 2
+    flour: 60
+    onions: 100
+    sunflower_oil: 80
+    sour_cream: 250
+  steps:
+    - "Bulves ir svogūną smulkiai sutarkuokite, nuspauskite skystį."
+    - "Įmuškite kiaušinius, įmaišykite miltus."
+    - "Kepkite blynus karštame aliejuje iki auksinės spalvos. Patiekite su grietine."
+
+chili_con_carne:
+  name: "Čili su mėsa ir ryžiais"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 45
+  tags: [high_protein]
+  ingredients:
+    beef_pork_mince: 500
+    red_beans: 400
+    canned_tomatoes: 400
+    bell_pepper: 200
+    onions: 150
+    garlic: 0.25
+    rice: 250
+    sunflower_oil: 20
+  steps:
+    - "Svogūną, česnaką ir papriką pakepinkite, sudėkite faršą ir apkepkite."
+    - "Sudėkite pomidorus ir pupeles, troškinkite 25 min."
+    - "Patiekite su išvirtais ryžiais."
+
+chickpea_spinach_curry:
+  name: "Avinžirnių ir špinatų troškinys su ryžiais"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 35
+  tags: [vegan]
+  ingredients:
+    chickpeas: 800
+    canned_tomatoes: 400
+    spinach: 200
+    onions: 150
+    garlic: 0.25
+    rice: 300
+    sunflower_oil: 30
+  steps:
+    - "Svogūną ir česnaką pakepinkite aliejuje."
+    - "Sudėkite pomidorus ir nusausintus avinžirnius, troškinkite 15 min."
+    - "Įmaišykite špinatus, kol suglebs. Patiekite su ryžiais."
+
+lentil_dal:
+  name: "Raudonųjų lęšių troškinys su ryžiais"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 35
+  tags: [vegan]
+  ingredients:
+    red_lentils: 300
+    canned_tomatoes: 400
+    onions: 150
+    carrots: 100
+    garlic: 0.25
+    rice: 250
+    sunflower_oil: 30
+  steps:
+    - "Svogūną, morką ir česnaką pakepinkite aliejuje."
+    - "Sudėkite lęšius, pomidorus ir 600 ml vandens, virkite 20 min., kol lęšiai suirs."
+    - "Patiekite su ryžiais."
+
+mushroom_risotto:
+  name: "Grybų rizotas"
+  meal_type: [dinner]
+  servings: 4
+  prep_minutes: 40
+  tags: [vegetarian]
+  ingredients:
+    rice: 350
+    mushrooms: 400
+    onions: 100
+    butter: 40
+    cheese: 80
+    garlic: 0.25
+  steps:
+    - "Svogūną ir česnaką pakepinkite svieste, sudėkite grybus ir kepkite 5 min."
+    - "Suberkite ryžius, pamaišykite ir po truputį pilkite karštą vandenį, nuolat maišydami, apie 20 min."
+    - "Įmaišykite tarkuotą sūrį ir likusį sviestą."
+
+tuna_tomato_spaghetti:
+  name: "Spagečiai su tunu ir pomidorų padažu"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 20
+  tags: [high_protein]
+  ingredients:
+    spaghetti: 400
+    tuna: 320
+    tomato_sauce: 500
+    onions: 100
+    garlic: 0.25
+    sunflower_oil: 20
+  steps:
+    - "Išvirkite spagečius."
+    - "Svogūną ir česnaką pakepinkite, supilkite pomidorų padažą ir sudėkite tuną."
+    - "Pakaitinkite 5 min. ir sumaišykite su spagečiais."
+
+creamy_chicken_pasta:
+  name: "Makaronai su vištiena ir grybais grietinėlės padaže"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 30
+  tags: [high_protein]
+  ingredients:
+    pasta: 400
+    chicken_fillet: 500
+    mushrooms: 250
+    cream: 200
+    cheese: 50
+    onions: 100
+    sunflower_oil: 20
+  steps:
+    - "Išvirkite makaronus."
+    - "Vištieną apkepkite, sudėkite svogūną ir grybus, kepkite 5 min."
+    - "Supilkite grietinėlę, įberkite sūrio ir patroškinkite 5 min."
+    - "Sumaišykite su makaronais."
+
+sausages_sauerkraut:
+  name: "Dešrelės su troškintais raugintais kopūstais ir bulvėmis"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 50
+  tags: []
+  ingredients:
+    sausages: 500
+    sauerkraut: 800
+    potatoes: 1000
+    onions: 100
+    caraway: 3
+    sunflower_oil: 20
+  steps:
+    - "Svogūną pakepinkite, sudėkite raugintus kopūstus su kmynais ir troškinkite 40 min."
+    - "Išvirkite bulves."
+    - "Dešreles apkepkite arba išvirkite ir patiekite su kopūstais ir bulvėmis."
+
+roast_pork_vegetables:
+  name: "Kepta kiaulienos mentė su daržovėmis"
+  meal_type: [dinner]
+  servings: 4
+  prep_minutes: 100
+  tags: [high_protein]
+  ingredients:
+    pork_shoulder: 800
+    potatoes: 1000
+    carrots: 200
+    onions: 150
+    garlic: 0.5
+    caraway: 3
+  steps:
+    - "Kiaulieną įtrinkite česnaku ir kmynais."
+    - "Sudėkite į kepimo indą su supjaustytomis bulvėmis, morkomis ir svogūnais, įpilkite stiklinę vandens."
+    - "Uždenkite ir kepkite 180 °C orkaitėje 1,5 val., pabaigoje atidenkite, kad apskrustų."
+
+tortilla_pizza:
+  name: "Greitoji pica ant tortilijų"
+  meal_type: [dinner]
+  servings: 4
+  prep_minutes: 20
+  tags: []
+  ingredients:
+    tortillas: 320
+    tomato_sauce: 200
+    mozzarella: 250
+    sausages: 200
+    bell_pepper: 150
+    mushrooms: 150
+  steps:
+    - "Tortilijas aptepkite pomidorų padažu."
+    - "Sudėkite supjaustytas dešreles, papriką, grybus ir mocarelą."
+    - "Kepkite 220 °C orkaitėje 8–10 min."
+
+bean_quesadillas:
+  name: "Kesadilijos su pupelėmis ir kukurūzais"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 20
+  tags: [vegetarian]
+  ingredients:
+    tortillas: 480
+    red_beans: 400
+    corn: 300
+    cheese: 200
+    bell_pepper: 150
+    sour_cream: 150
+  steps:
+    - "Pupeles grubiai sutrinkite, sumaišykite su kukurūzais ir smulkinta paprika."
+    - "Ant pusės tortilijos paskleiskite įdarą, užberkite sūrio ir perlenkite."
+    - "Kepkite sausoje keptuvėje po 2–3 min. iš abiejų pusių. Patiekite su grietine."
+
+barley_mushroom_pilaf:
+  name: "Perlinės kruopos su grybais ir svogūnais"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 60
+  tags: [vegan]
+  ingredients:
+    pearl_barley: 300
+    mushrooms: 400
+    onions: 200
+    carrots: 150
+    sunflower_oil: 40
+  steps:
+    - "Kruopas išvirkite (apie 40 min.)."
+    - "Svogūnus, morkas ir grybus pakepinkite aliejuje."
+    - "Sumaišykite su kruopomis ir pakaitinkite 5 min."
+
+couscous_chicken_vegetables:
+  name: "Kuskusas su vištiena ir daržovėmis"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 25
+  tags: [high_protein]
+  ingredients:
+    couscous: 300
+    chicken_fillet: 500
+    zucchini: 1
+    bell_pepper: 200
+    onions: 100
+    sunflower_oil: 30
+    lemons: 60
+  steps:
+    - "Kuskusą užpilkite verdančiu vandeniu, uždenkite ir palaikykite 5 min."
+    - "Vištieną apkepkite, sudėkite cukiniją, papriką ir svogūną, kepkite 8 min."
+    - "Sumaišykite su kuskusu ir apšlakstykite citrinos sultimis."
+
+egg_fried_rice:
+  name: "Kepti ryžiai su kiaušiniais ir daržovėmis"
+  meal_type: [lunch, dinner]
+  servings: 4
+  prep_minutes: 25
+  tags: [vegetarian]
+  ingredients:
+    rice: 350
+    eggs: 4
+    frozen_vegetables: 400
+    soy_sauce: 40
+    sunflower_oil: 30
+  steps:
+    - "Išvirkite ryžius ir leiskite atvėsti (geriausia vakarykščiai)."
+    - "Keptuvėje apkepkite daržoves, sudėkite ryžius."
+    - "Pastumkite į šoną, išplakite kiaušinius ir maišydami iškepkite."
+    - "Viską sumaišykite su sojos padažu."
+
+cauliflower_cheese_bake:
+  name: "Orkaitėje keptas žiedinis kopūstas su sūriu ir bulvėmis"
+  meal_type: [dinner]
+  servings: 4
+  prep_minutes: 45
+  tags: [vegetarian]
+  ingredients:
+    cauliflower: 1
+    potatoes: 800
+    cheese: 150
+    cream: 200
+    eggs: 2
+  steps:
+    - "Žiedinį kopūstą ir bulves pusiau išvirkite pasūdytame vandenyje."
+    - "Sudėkite į kepimo formą, užpilkite grietinėlės ir kiaušinių mišiniu."
+    - "Užberkite tarkuoto sūrio ir kepkite 190 °C orkaitėje 25 min."
+
+baked_apples_curd:
+  name: "Kepti obuoliai su varške ir medumi"
+  meal_type: [snack]
+  servings: 4
+  prep_minutes: 30
+  tags: [vegetarian]
+  ingredients:
+    apples: 600
+    cottage_cheese: 180
+    honey: 30
+    raisins: 40
+  steps:
+    - "Obuoliams išpjaukite sėklalizdžius."
+    - "Varškę išmaišykite su razinomis ir puse medaus, prikimškite obuolius."
+    - "Kepkite 180 °C orkaitėje apie 20 min., prieš patiekdami apšlakstykite likusiu medumi."
+
+curd_snack_banana:
+  name: "Varškės sūrelis su bananu"
+  meal_type: [snack]
+  servings: 4
+  prep_minutes: 2
+  tags: [vegetarian]
+  ingredients:
+    curd_snack: 180
+    bananas: 480
+  steps:
+    - "Patiekite po varškės sūrelį ir bananą."
+
+yogurt_blueberries_honey:
+  name: "Jogurtas su šilauogėmis ir medumi"
+  meal_type: [breakfast, snack]
+  servings: 4
+  prep_minutes: 5
+  tags: [vegetarian]
+  ingredients:
+    yogurt: 600
+    blueberries: 200
+    oats: 80
+    honey: 40
+  steps:
+    - "Jogurtą paskirstykite į dubenėlius."
+    - "Užberkite avižinių dribsnių ir šilauogių, apšlakstykite medumi."
+
+peanut_banana_toast:
+  name: "Skrebučiai su žemės riešutų kremu ir bananu"
+  meal_type: [breakfast, snack]
+  servings: 4
+  prep_minutes: 10
+  tags: [vegetarian]
+  ingredients:
+    white_bread: 240
+    peanut_cream: 80
+    bananas: 240
+  steps:
+    - "Batono riekeles paskrudinkite."
+    - "Užtepkite žemės riešutų kremo ir uždėkite banano griežinėlių."
+
+chickpea_spread_vegetables:
+  name: "Avinžirnių užtepėlė su daržovių lazdelėmis"
+  meal_type: [snack]
+  servings: 4
+  prep_minutes: 15
+  tags: [vegan]
+  ingredients:
+    chickpeas: 400
+    garlic: 0.5
+    lemons: 60
+    sunflower_oil: 30
+    carrots: 200
+    cucumber: 1
+    bell_pepper: 150
+  steps:
+    - "Nusausintus avinžirnius sutrinkite su česnaku, citrinos sultimis, aliejumi ir trupučiu vandens."
+    - "Morkas, agurką ir papriką supjaustykite lazdelėmis."
+    - "Daržoves patiekite su užtepėle."
+
+cottage_cheese_garlic_spread:
+  name: "Varškės užtepėlė su česnaku ant ruginės duonos"
+  meal_type: [breakfast, snack]
+  servings: 4
+  prep_minutes: 10
+  tags: [vegetarian, high_protein]
+  ingredients:
+    cottage_cheese: 540
+    sour_cream: 60
+    garlic: 0.25
+    cucumber: 1
+    rye_bread: 200
+  steps:
+    - "Varškę ištrinkite su grietine ir spaustu česnaku."
+    - "Užtepkite ant ruginės duonos riekių ir uždėkite agurko griežinėlių."
+
+pears_yogurt_honey:
+  name: "Kriaušės su jogurtu ir medumi"
+  meal_type: [snack]
+  servings: 4
+  prep_minutes: 5
+  tags: [vegetarian]
+  ingredients:
+    pears: 500
+    yogurt: 300
+    honey: 30
+  steps:
+    - "Kriaušes supjaustykite skiltelėmis."
+    - "Patiekite su jogurtu, apšlakstytu medumi."
+
+oat_raisin_cookies:
+  name: "Avižiniai sausainiai su razinomis"
+  meal_type: [snack]
+  servings: 8
+  prep_minutes: 35
+  tags: [vegetarian]
+  ingredients:
+    oats: 200
+    flour: 80
+    margarine: 100
+    sugar: 80
+    eggs: 1
+    raisins: 80
+  steps:
+    - "Margariną ištrinkite su cukrumi ir kiaušiniu."
+    - "Įmaišykite avižinius dribsnius, miltus ir razinas."
+    - "Šaukštu dėkite krūveles ant kepimo popieriaus ir kepkite 180 °C apie 15 min."
+
+carrot_apple_salad:
+  name: "Morkų ir obuolių salotos su razinomis"
+  meal_type: [snack]
+  servings: 4
+  prep_minutes: 10
+  tags: [vegetarian]
+  ingredients:
+    carrots: 400
+    apples: 200
+    raisins: 50
+    sour_cream: 100
+  steps:
+    - "Morkas ir obuolius sutarkuokite stambia tarka."
+    - "Įmaišykite razinas ir pagardinkite grietine."
+
+mozzarella_tomato_toast:
+  name: "Skrebučiai su mocarela ir pomidorais"
+  meal_type: [snack]
+  servings: 4
+  prep_minutes: 15
+  tags: [vegetarian]
+  ingredients:
+    white_bread: 200
+    mozzarella: 250
+    tomatoes: 300
+    sunflower_oil: 15
+    garlic: 0.25
+  steps:
+    - "Batono riekeles apšlakstykite aliejumi ir paskrudinkite, patrinkite česnaku."
+    - "Uždėkite pomidorų ir mocarelos griežinėlių."
+    - "Trumpai pakepinkite orkaitėje, kol sūris išsilydys."
+
+eggs_cucumber_rye:
+  name: "Virti kiaušiniai su agurku ir rugine duona"
+  meal_type: [breakfast, snack]
+  servings: 4
+  prep_minutes: 12
+  tags: [vegetarian]
+  ingredients:
+    eggs: 8
+    cucumber: 2
+    rye_bread: 160
+    mayonnaise: 40
+  steps:
+    - "Kiaušinius virkite 9 min., atvėsinkite ir perpjaukite pusiau."
+    - "Patiekite su agurko griežinėliais, rugine duona ir majonezu."
+
+banana_oat_pancakes:
+  name: "Bananų ir avižų blyneliai"
+  meal_type: [breakfast, snack]
+  servings: 4
+  prep_minutes: 20
+  tags: [vegetarian]
+  ingredients:
+    bananas: 360
+    eggs: 3
+    oats: 120
+    sunflower_oil: 15
+    honey: 20
+  steps:
+    - "Bananus sutrinkite šakute, įmuškite kiaušinius ir įmaišykite avižinius dribsnius."
+    - "Kepkite nedidelius blynelius įkaitintame aliejuje iš abiejų pusių."
+    - "Patiekite apšlakstytus medumi."
+
+sprat_sandwiches:
+  name: "Šprotų sumuštiniai su agurku"
+  meal_type: [snack]
+  servings: 4
+  prep_minutes: 10
+  tags: []
+  ingredients:
+    rye_bread: 200
+    sprats: 240
+    cucumber: 1
+    mayonnaise: 30
+    garlic: 0.25
+  steps:
+    - "Majonezą išmaišykite su spaustu česnaku ir užtepkite ant duonos."
+    - "Uždėkite šprotų ir agurko griežinėlių."
+
+fried_garlic_bread:
+  name: "Kepta duona su česnaku ir sūriu"
+  meal_type: [snack]
+  servings: 4
+  prep_minutes: 15
+  tags: [vegetarian]
+  ingredients:
+    rye_bread: 300
+    garlic: 1
+    sunflower_oil: 60
+    cheese: 80
+    mayonnaise: 50
+  steps:
+    - "Duoną supjaustykite lazdelėmis ir apkepkite aliejuje iki traškumo."
+    - "Karštą duoną patrinkite česnaku."
+    - "Patiekite su tarkuotu sūriu ir česnakiniu majonezu."
+
+tuna_tortilla_rolls:
+  name: "Tortilijų suktinukai su tunu ir lydytu sūriu"
+  meal_type: [snack]
+  servings: 4
+  prep_minutes: 15
+  tags: []
+  ingredients:
+    tortillas: 240
+    tuna: 160
+    processed_cheese: 100
+    cucumber: 1
+  steps:
+    - "Tortilijas užtepkite lydytu sūriu."
+    - "Paskleiskite nusausintą tuną ir plonas agurko juosteles."
+    - "Susukite, atvėsinkite ir supjaustykite suktinukais."
+
+curd_doughnuts:
+  name: "Varškės spurgytės"
+  meal_type: [snack]
+  servings: 6
+  prep_minutes: 40
+  tags: [vegetarian]
+  ingredients:
+    cottage_cheese: 360
+    eggs: 2
+    flour: 220
+    sugar: 60
+    sunflower_oil: 100
+  steps:
+    - "Varškę ištrinkite su kiaušiniais ir cukrumi, įmaišykite miltus."
+    - "Šlapiomis rankomis formuokite rutuliukus."
+    - "Kepkite įkaitintame aliejuje, kol gražiai paruduos, sudėkite ant popierinio rankšluosčio."
